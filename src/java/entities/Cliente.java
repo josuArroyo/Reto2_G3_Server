@@ -26,7 +26,7 @@ public class Cliente extends User {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int edad;
-    private User user;
+   
 
     /**
      * @associates <{uml.ObjetivoUser}>
@@ -62,13 +62,6 @@ public class Cliente extends User {
         return edad;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
 
     @Override
     public String toString() {

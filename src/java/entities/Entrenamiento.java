@@ -11,24 +11,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
+
 @Entity
+@Table(name="entrenamiento", schema="Fuerza_g3")
 public class Entrenamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer idEntrenamiento;
+    private Integer idEntrenamiento;
+    
+    @NotNull
     private String descripcion;
+    
+    @NotNull
     private Integer duracion;
+    
+    @NotNull
+    @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
+    @Temporal (TemporalType.DATE)
     private Date fechaPeriod;
+    
+    @NotNull
     private Integer intensidad;
+    
+    @NotNull
     private Integer repeticion;
+    
+    @NotNull
+    @ManyToOne
     private Objetivo objetivo;
+    
+    @NotNull
+    @ManyToMany()
+    @JoinTable(name="admin_entrenamieto", schema="Fuerza_g3")
     private Admin admin;
 
 

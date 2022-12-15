@@ -12,13 +12,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author 2dam
  */
 @Entity
-@DiscriminatorValue("AD")
+//@DiscriminatorValue("AD")
+@Table(name="administrador", schema="Fuerza_g3")
 public class Admin extends User {
 
     private static final long serialVersionUID = 1L;
@@ -27,26 +31,30 @@ public class Admin extends User {
    
     
     private String licencia;
-    private User user;
+   
 
     /**
      * @associates <{uml.Evento}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Evento> listaEvento;
 
     /**
      * @associates <{uml.Lugar}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Lugar> listaLugar;
 
     /**
      * @associates <{uml.Entrenamiento}>
      */
+    @ManyToMany(mappedBy="admin")
     private Set<Entrenamiento> listaEntrenamiento;
 
     /**
      * @associates <{uml.Objetivo}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Objetivo> listaObjetivo;
 
 
@@ -56,14 +64,6 @@ public class Admin extends User {
 
     public String getLicencia() {
         return licencia;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public void setListaEvento(Set<Evento> listaEvento) {
