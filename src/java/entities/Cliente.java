@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -19,6 +21,7 @@ import javax.persistence.Id;
  */
 @Entity
 @DiscriminatorValue("CL")
+@Table(name="customer",schema="Fuerza_g3")
 public class Cliente extends User {
 
     private static final long serialVersionUID = 1L;
@@ -36,12 +39,14 @@ public class Cliente extends User {
     /**
      * @associates <{uml.Evento}>
      */
+    @ManyToMany(mappedBy="listaCliente")
     private Set<Evento> listaEvento;
 
     public void setListaObjetivo(Set<Objetivo> listaObjetivo) {
         this.listaObjetivo = listaObjetivo;
     }
 
+    
     public Set<Objetivo> getListaObjetivo() {
         return listaObjetivo;
     }

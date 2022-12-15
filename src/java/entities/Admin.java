@@ -12,10 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
- * @author 2dam
+ * @author Ale, 
  */
 @Entity
 @DiscriminatorValue("AD")
@@ -32,6 +33,7 @@ public class Admin extends User {
     /**
      * @associates <{uml.Evento}>
      */
+    @OneToMany(mappedBy="admin")
     private Set<Evento> listaEvento;
 
     /**
