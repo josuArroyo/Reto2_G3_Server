@@ -26,7 +26,7 @@ import javax.validation.constraints.Pattern;
 
 /**
  *
- * @author 2dam
+ * @author 2dam,josu
  */
 @Entity
 @Table(name = "lugar", schema = "Fuerza_g3")
