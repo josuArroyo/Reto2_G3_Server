@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="signIn", schema="Fuerza_G3")
+@XmlRootElement
 public class SignIn implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,15 +31,16 @@ public class SignIn implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
-    @NotNull
+    
     private String nomUser;
-    @NotNull
+    
     private String passwd;
     private User user;
 
     @OneToMany(mappedBy="User")
     public Set<User> listaUsers;
 
+    @XmlTransient
     public Set<User> getListaUsers() {
         return listaUsers;
     }

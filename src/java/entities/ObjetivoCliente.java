@@ -17,13 +17,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Diego Y Jessica
  */
 @Entity
-@Table(name="objectiveClient", schema="Fuerza_G3")
+@Table(name="objetivoCliente", schema="Fuerza_G3")
+@XmlRootElement
 public class ObjetivoCliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
