@@ -5,7 +5,6 @@
  */
 package entities;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author 2dam,josuA
  */
 @Entity
-@Table(name = "lugar", schema = "Fuerza_g3")
+@Table(name = "lugar", schema = "Fuerza_G3")
 
 @XmlRootElement
 public class Lugar implements Serializable {

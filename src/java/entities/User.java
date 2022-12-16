@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author 2dam
  */
 @Entity
+@Table(name="user", schema="Fuerza_G3")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class User implements Serializable {
@@ -29,11 +32,12 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idUser;
-
+    
+    
     public Integer getId() {
         return idUser;
     }
-
+    
     public void setId(Integer id) {
         this.idUser = id;
     }
@@ -48,6 +52,7 @@ public class User implements Serializable {
     private String passwd;
     private String confPasswd;
     
+    @ManyToOne
     private Set<SignIn> listaSignIn;
     
     
