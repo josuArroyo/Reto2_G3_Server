@@ -6,50 +6,71 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author Diego Y Jessica
  */
+
 @Entity
+@Table(name="objetivo", schema="Fuerza_G3")
+@XmlRootElement
 public class Objetivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    
     private Integer idObjetivo;
+    
+   
     private String descripcion;
+    
+    
     private String valorParam;
+    
+    
     private String descriParam;
 
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    private List<Cliente> listaClientes;
+    //Relaciones
+    @OneToMany(mappedBy="ObjetivoCliente")
+    private Set<Cliente> listaClientes;
 
+    
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    private List<Entrenamiento> listaEntrenamiento;
+    @OneToMany(mappedBy="Entrenamiento")
+    private Set<Entrenamiento> listaEntrenamiento;
 
-    public void setListaEntrenamiento(List<Entrenamiento> listaEntrenamiento) {
+    public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
         this.listaEntrenamiento = listaEntrenamiento;
     }
 
-    public List<Entrenamiento> getListaEntrenamiento() {
+    @XmlTransient
+    public Set<Entrenamiento> getListaEntrenamiento() {
         return listaEntrenamiento;
     }
     
-    public void setListaClientes(List<Cliente> listaClientes) {
+    public void setListaClientes(Set<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
-    public List<Cliente> getListaClientes() {
+    @XmlTransient
+    public Set<Cliente> getListaClientes() {
         return listaClientes;
     }
 
@@ -62,8 +83,6 @@ public class Objetivo implements Serializable {
         return admin;
     }
     private Admin admin;
-
-
 
 
     public void setIdObjetivo(Integer idObjetivo) {

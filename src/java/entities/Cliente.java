@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -21,7 +23,8 @@ import javax.persistence.Table;
  */
 @Entity
 @DiscriminatorValue("CL")
-@Table(name="customer",schema="Fuerza_g3")
+@Table(name="cliente",schema="Fuerza_G3")
+@XmlRootElement
 public class Cliente extends User {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +33,7 @@ public class Cliente extends User {
 
     private int edad;
     private User user;
-
+   
     /**
      * @associates <{uml.ObjetivoUser}>
      */
@@ -55,6 +58,7 @@ public class Cliente extends User {
         this.listaEvento = listaEvento;
     }
 
+    @XmlTransient
     public Set<Evento> getListaEvento() {
         return listaEvento;
     }
