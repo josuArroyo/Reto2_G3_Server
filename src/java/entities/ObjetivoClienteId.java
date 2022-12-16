@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Diego
+ * @author DiegoF
  */
 @Embeddable
 public class ObjetivoClienteId implements Serializable{
