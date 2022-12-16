@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @DiscriminatorValue("CL")
-@Table(name="customer",schema="Fuerza_g3")
+@Table(name="cliente",schema="Fuerza_g3")
 public class Cliente extends User {
 
     private static final long serialVersionUID = 1L;

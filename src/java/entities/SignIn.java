@@ -6,16 +6,21 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author 2dam
+ * @author Diego y Jessica
  */
 @Entity
+@Table(name="signIn", schema="Fuerza_G3")
 public class SignIn implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,11 +28,23 @@ public class SignIn implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
+    @NotNull
     private String nomUser;
+    @NotNull
     private String passwd;
     private User user;
 
+    @OneToMany(mappedBy="User")
+    public Set<User> listaUsers;
 
+    public Set<User> getListaUsers() {
+        return listaUsers;
+    }
+
+    public void setListaUsers(Set<User> listaUsers) {
+        this.listaUsers = listaUsers;
+    }
+    
     public void setUser(User user) {
         this.user = user;
     }

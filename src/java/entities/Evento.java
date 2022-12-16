@@ -26,7 +26,7 @@ import javax.validation.constraints.Pattern;
  * @author Ale, 
  */
 @Entity
-@Table(name="event",schema="Fuerza_g3")
+@Table(name="evento",schema="Fuerza_g3")
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
