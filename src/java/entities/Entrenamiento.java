@@ -19,6 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,7 +28,8 @@ import javax.validation.constraints.Pattern;
  */
 
 @Entity
-@Table(name="entrenamiento", schema="Fuerza_g3")
+@Table(name="entrenamiento", schema="Fuerza_G3")
+@XmlRootElement
 public class Entrenamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,30 +38,30 @@ public class Entrenamiento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idEntrenamiento;
     
-    @NotNull
+ 
     private String descripcion;
     
-    @NotNull
+   
     private Integer duracion;
     
-    @NotNull
+    
     @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
     @Temporal (TemporalType.DATE)
     private Date fechaPeriod;
     
-    @NotNull
+  
     private Integer intensidad;
     
-    @NotNull
+    
     private Integer repeticion;
     
-    @NotNull
+  
     @ManyToOne
     private Objetivo objetivo;
     
-    @NotNull
+   
     @ManyToMany()
-    @JoinTable(name="admin_entrenamieto", schema="Fuerza_g3")
+    @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
     private Admin admin;
 
 
@@ -82,6 +85,7 @@ public class Entrenamiento implements Serializable {
         this.admin = admin;
     }
 
+    @XmlTransient
     public Admin getAdmin() {
         return admin;
     }

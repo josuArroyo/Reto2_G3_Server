@@ -35,6 +35,15 @@ public class ObjetivoClienteId implements Serializable{
         this.idObjetivo = idObjetivo;
     }
 
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -68,6 +77,8 @@ public class ObjetivoClienteId implements Serializable{
     public String toString() {
         return "ObjetivoUserId{" + "edad=" + idCliente + ", idObjetivo=" + idObjetivo + '}';
     }
+
+   
     
     
 }

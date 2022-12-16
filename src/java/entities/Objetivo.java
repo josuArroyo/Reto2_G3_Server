@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -23,21 +24,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="objetivo", schema="Fuerza_G3")
+@XmlRootElement
 public class Objetivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    
     private Integer idObjetivo;
     
-    @NotNull
+   
     private String descripcion;
     
-    @NotNull
+    
     private String valorParam;
     
-    @NotNull
+    
     private String descriParam;
 
     /**

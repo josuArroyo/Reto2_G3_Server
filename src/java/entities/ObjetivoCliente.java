@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name="objetivoCliente", schema="Fuerza_G3")
+@XmlRootElement
 public class ObjetivoCliente implements Serializable {
 
     private static final long serialVersionUID = 1L;

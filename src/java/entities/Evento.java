@@ -20,13 +20,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Ale, 
  */
 @Entity
-@Table(name="evento",schema="Fuerza_g3")
+@Table(name="evento",schema="Fuerza_G3")
+@XmlRootElement
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,20 +37,20 @@ public class Evento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idEvento;
     
-    @NotNull
+  
     private String tipoEvento;
     
-    @NotNull
+    
     private Integer numPart;
     
-    @NotNull
+    
     private String descripcion;
     
     @Temporal(TemporalType.DATE)
     @Pattern(regexp="^\\d{4}-\\d{2}-\\d{2}$")
     private Date fecha;
     
-    @NotNull
+    
     private String premio;
     
     @ManyToOne
@@ -61,7 +64,7 @@ public class Evento implements Serializable {
      */
     
     @ManyToMany()
-    @JoinTable(name="event_customer",schema="Fuerza_g3")
+    @JoinTable(name="event_customer",schema="Fuerza_G3")
     private Set<Cliente> listaCliente;
 
 
@@ -134,6 +137,7 @@ public class Evento implements Serializable {
         this.listaCliente = listaCliente;
     }
 
+    @XmlTransient
     public Set<Cliente> getListaCliente() {
         return listaCliente;
     }
