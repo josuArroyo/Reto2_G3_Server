@@ -12,12 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author 2dam
  */
 @Entity
+@XmlRootElement
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,6 +33,7 @@ public class Evento implements Serializable {
     private Date fecha;
     private String premio;
     private Admin admin;
+    @ManyToOne
     private Lugar lugar;
 
     /**

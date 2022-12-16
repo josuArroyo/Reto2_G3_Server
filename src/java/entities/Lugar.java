@@ -5,7 +5,7 @@
  */
 package entities;
 
-import static entities.Evento_.lugar;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +33,7 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Table(name = "lugar", schema = "Fuerza_g3")
 
+@XmlRootElement
 public class Lugar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +68,7 @@ public class Lugar implements Serializable {
         this.listaEvento = listaEvento;
     }
 
+    @XmlTransient
     public Set<Evento> getListaEvento() {
         return listaEvento;
     }
