@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -41,19 +42,23 @@ public class Objetivo implements Serializable {
     
     
     private String descriParam;
+    
+    @ManyToOne
+    private Admin admin;
 
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    //Relaciones
-    @OneToMany(mappedBy="ObjetivoCliente")
-    private Set<Cliente> listaClientes;
+    
+//Relaciones
+    @OneToMany (mappedBy="objetivo")
+    private Set<ObjetivoCliente> listaClientes;
 
     
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(mappedBy="Entrenamiento")
+    @OneToMany(mappedBy="idEntrenamiento")
     private Set<Entrenamiento> listaEntrenamiento;
 
     public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
@@ -64,26 +69,26 @@ public class Objetivo implements Serializable {
     public Set<Entrenamiento> getListaEntrenamiento() {
         return listaEntrenamiento;
     }
-    
-    public void setListaClientes(Set<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
 
     @XmlTransient
-    public Set<Cliente> getListaClientes() {
+    public Set<ObjetivoCliente> getListaClientes() {
         return listaClientes;
     }
 
+    public void setListaClientes(Set<ObjetivoCliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+    
+
+    public Admin getAdmin() {
+        return admin;
+    }
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-    private Admin admin;
-
+  
 
     public void setIdObjetivo(Integer idObjetivo) {
         this.idObjetivo = idObjetivo;

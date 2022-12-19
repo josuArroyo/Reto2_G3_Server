@@ -7,15 +7,18 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name="user", schema="Fuerza_G3")
+@DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class User implements Serializable {
@@ -52,7 +56,7 @@ public class User implements Serializable {
     private String passwd;
     private String confPasswd;
     
-    @ManyToOne
+    @ManyToMany //()
     private Set<SignIn> listaSignIn;
     
     
@@ -60,6 +64,7 @@ public class User implements Serializable {
         this.listaSignIn = listaSignIn;
     }
 
+    @XmlTransient
     public Set<SignIn> getListaSignIn() {
         return listaSignIn;
     }

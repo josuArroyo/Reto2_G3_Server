@@ -7,10 +7,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -29,17 +31,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ObjetivoCliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    
     @EmbeddedId
-    private ObjetivoClienteId objetivoUserId;
+    private ObjetivoClienteId objetivoClienteId;
+     
+    //@JoinColumn(name ="cliente",referencedColumnName="idUser") 
+    @MapsId("idUser")
+    @ManyToOne
+    private Cliente cliente;
      
     @MapsId("idObjetivo")
     @ManyToOne
+    //@JoinColumn(name ="objetivo",referencedColumnName="idObjetivo")
     private Objetivo objetivo;
     
-    @MapsId("idCliente")
-    @ManyToOne
-    private Cliente cliente;
+    
     
     @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
     @Temporal(TemporalType.DATE)
@@ -62,18 +68,28 @@ public class ObjetivoCliente implements Serializable {
         return objetivo;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public ObjetivoClienteId getObjetivoUserId() {
+        return objetivoClienteId;
+    }
+
+    public void setObjetivoUserId(ObjetivoClienteId objetivoUserId) {
+        this.objetivoClienteId = objetivoUserId;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+   
+   
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (objetivoUserId!= null ? objetivoUserId.hashCode() : 0);
+        hash += (objetivoClienteId!= null ? objetivoClienteId.hashCode() : 0);
         return hash;
     }
 
@@ -84,7 +100,7 @@ public class ObjetivoCliente implements Serializable {
             return false;
         }
         ObjetivoCliente other = (ObjetivoCliente) object;
-        if ((this.objetivoUserId == null && other.objetivoUserId != null) || (this.objetivoUserId != null && !this.objetivoUserId.equals(other.objetivoUserId))) {
+        if ((this.objetivoClienteId == null && other.objetivoClienteId != null) || (this.objetivoClienteId != null && !this.objetivoClienteId.equals(other.objetivoClienteId))) {
             return false;
         }
         return true;
@@ -92,7 +108,7 @@ public class ObjetivoCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.ObjetivoUser[ id=" + objetivoUserId + " ]";
+        return "entities.ObjetivoUser[ id=" + objetivoClienteId + " ]";
     }
 
 }

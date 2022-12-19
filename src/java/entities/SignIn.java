@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -35,9 +36,10 @@ public class SignIn implements Serializable {
     private String nomUser;
     
     private String passwd;
-    private User user;
+ 
 
-    @OneToMany(mappedBy="User")
+    //@OneToMany(mappedBy="User")
+    @ManyToMany //(mappedBy = "listaSignIn")
     public Set<User> listaUsers;
 
     @XmlTransient
@@ -48,14 +50,16 @@ public class SignIn implements Serializable {
     public void setListaUsers(Set<User> listaUsers) {
         this.listaUsers = listaUsers;
     }
-    
-    public void setUser(User user) {
-        this.user = user;
+
+    public Integer getId() {
+        return id;
     }
 
-    public User getUser() {
-        return user;
+    public void setId(Integer id) {
+        this.id = id;
     }
+    
+    
 
     public void setNomUser(String nomUser) {
         this.nomUser = nomUser;
