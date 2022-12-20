@@ -36,16 +36,16 @@ public class ObjetivoClienteFacadeREST extends AbstractFacade<ObjetivoCliente> {
     private ObjetivoClienteId getPrimaryKey(PathSegment pathSegment) {
         /*
          * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;idCliente=idClienteValue;idObjetivo=idObjetivoValue'.
+         * URI path part is supposed to be in form of 'somePath;idUser=idUserValue;idObjetivo=idObjetivoValue'.
          * Here 'somePath' is a result of getPath() method invocation and
          * it is ignored in the following code.
          * Matrix parameters are used as field names to build a primary key instance.
          */
         entities.ObjetivoClienteId key = new entities.ObjetivoClienteId();
         javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> idCliente = map.get("idCliente");
-        if (idCliente != null && !idCliente.isEmpty()) {
-            key.setIdCliente(new java.lang.Integer(idCliente.get(0)));
+        java.util.List<String> idUser = map.get("idUser");
+        if (idUser != null && !idUser.isEmpty()) {
+            key.setIdUser(new java.lang.Integer(idUser.get(0)));
         }
         java.util.List<String> idObjetivo = map.get("idObjetivo");
         if (idObjetivo != null && !idObjetivo.isEmpty()) {
