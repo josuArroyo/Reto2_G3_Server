@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @DiscriminatorValue("CL")
-@Table(name="cliente",schema="Fuerza_G3")
+@Table(name = "cliente", schema = "Fuerza_G3")
 @XmlRootElement
 public class Cliente extends User {
 
@@ -32,24 +34,23 @@ public class Cliente extends User {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int edad;
-   
 
     /**
      * @associates <{uml.ObjetivoUser}>
      */
+    @OneToMany
     private Set<Objetivo> listaObjetivo;
 
     /**
      * @associates <{uml.Evento}>
      */
-    @ManyToMany(mappedBy="listaCliente")
+    @ManyToMany(mappedBy = "listaCliente")
     private Set<Evento> listaEvento;
 
     public void setListaObjetivo(Set<Objetivo> listaObjetivo) {
         this.listaObjetivo = listaObjetivo;
     }
 
-    
     public Set<Objetivo> getListaObjetivo() {
         return listaObjetivo;
     }
@@ -70,7 +71,6 @@ public class Cliente extends User {
     public int getEdad() {
         return edad;
     }
-
 
     @Override
     public String toString() {

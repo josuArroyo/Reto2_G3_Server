@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,9 +61,10 @@ public class Entrenamiento implements Serializable {
     private Objetivo objetivo;
     
    
-    @ManyToMany()
-    @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
-    private Admin admin;
+    @ManyToMany(mappedBy = "listaEntrenamiento")
+  //  @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
+   // private Admin admin;
+    private Set<Admin> admin;
 
 
     public void setIdEntrenamiento(Integer idEntrenamiento) {
@@ -81,7 +83,15 @@ public class Entrenamiento implements Serializable {
         return objetivo;
     }
 
-    public void setAdmin(Admin admin) {
+    public Set<Admin> getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Set<Admin> admin) {
+        this.admin = admin;
+    }
+
+   /* public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
@@ -89,7 +99,7 @@ public class Entrenamiento implements Serializable {
     public Admin getAdmin() {
         return admin;
     }
-
+*/
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;

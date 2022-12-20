@@ -35,7 +35,7 @@ public class SignIn implements Serializable {
     private String nomUser;
     
     private String passwd;
-    private User user;
+   
 
     @OneToMany(mappedBy="User")
     public Set<User> listaUsers;
@@ -48,14 +48,15 @@ public class SignIn implements Serializable {
     public void setListaUsers(Set<User> listaUsers) {
         this.listaUsers = listaUsers;
     }
-    
-    public void setUser(User user) {
-        this.user = user;
+
+    public Integer getId() {
+        return id;
     }
 
-    public User getUser() {
-        return user;
+    public void setId(Integer id) {
+        this.id = id;
     }
+ 
 
     public void setNomUser(String nomUser) {
         this.nomUser = nomUser;
