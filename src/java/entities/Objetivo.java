@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -55,6 +56,9 @@ public class Objetivo implements Serializable {
      */
     @OneToMany(mappedBy="Entrenamiento")
     private Set<Entrenamiento> listaEntrenamiento;
+    
+    @ManyToOne
+    private Admin admin;
 
     public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
         this.listaEntrenamiento = listaEntrenamiento;
@@ -82,7 +86,7 @@ public class Objetivo implements Serializable {
     public Admin getAdmin() {
         return admin;
     }
-    private Admin admin;
+    
 
 
     public void setIdObjetivo(Integer idObjetivo) {
