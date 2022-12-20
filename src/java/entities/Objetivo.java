@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 
 @Entity
-@Table(name="objetivo", schema="Fuerza_G3")
+@Table(name="Objetivo", schema="Fuerza_G3")
 @XmlRootElement
 public class Objetivo implements Serializable {
 
@@ -49,15 +49,16 @@ public class Objetivo implements Serializable {
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    //Relaciones
-    @OneToMany(mappedBy="ObjetivoCliente")
-    private Set<Cliente> listaClientes;
+    
+//Relaciones
+    @OneToMany (mappedBy="objetivo")
+    private Set<ObjetivoCliente> listaClientes;
 
     
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(mappedBy="Entrenamiento")
+    @OneToMany(mappedBy="idEntrenamiento")
     private Set<Entrenamiento> listaEntrenamiento;
 
     public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
@@ -68,26 +69,26 @@ public class Objetivo implements Serializable {
     public Set<Entrenamiento> getListaEntrenamiento() {
         return listaEntrenamiento;
     }
-    
-    public void setListaClientes(Set<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
 
     @XmlTransient
-    public Set<Cliente> getListaClientes() {
+    public Set<ObjetivoCliente> getListaClientes() {
         return listaClientes;
     }
 
+    public void setListaClientes(Set<ObjetivoCliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+    
+
+    public Admin getAdmin() {
+        return admin;
+    }
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-   
-
+  
 
     public void setIdObjetivo(Integer idObjetivo) {
         this.idObjetivo = idObjetivo;

@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 
 @Entity
-@Table(name="entrenamiento", schema="Fuerza_G3")
+@Table(name="Entrenamiento", schema="Fuerza_G3")
 @XmlRootElement
 public class Entrenamiento implements Serializable {
 
@@ -61,8 +61,8 @@ public class Entrenamiento implements Serializable {
     private Objetivo objetivo;
     
    
-    @ManyToMany(mappedBy = "listaEntrenamiento")
-    @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
+    @ManyToMany ()
+    @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
     private Set<Admin> admin;
 
 
@@ -82,6 +82,7 @@ public class Entrenamiento implements Serializable {
         return objetivo;
     }
 
+    @XmlTransient
     public Set<Admin> getAdmin() {
         return admin;
     }
@@ -90,15 +91,7 @@ public class Entrenamiento implements Serializable {
         this.admin = admin;
     }
 
-   /* public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    @XmlTransient
-    public Admin getAdmin() {
-        return admin;
-    }
-*/
+   
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;

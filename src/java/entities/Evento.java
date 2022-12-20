@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ale, 
  */
 @Entity
-@Table(name="evento",schema="Fuerza_G3")
+@Table(name="Evento",schema="Fuerza_G3")
 @XmlRootElement
 public class Evento implements Serializable {
 

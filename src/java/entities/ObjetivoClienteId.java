@@ -16,16 +16,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ObjetivoClienteId implements Serializable{
     
-    private Integer idCliente;
+    private Integer idUser;
     private Integer idObjetivo;
 
-    public Integer getEdad() {
-        return idCliente;
-    }
-
-    public void setEdad(Integer edad) {
-        this.idCliente = edad;
-    }
 
     public Integer getIdObjetivo() {
         return idObjetivo;
@@ -35,19 +28,19 @@ public class ObjetivoClienteId implements Serializable{
         this.idObjetivo = idObjetivo;
     }
 
-    public Integer getIdCliente() {
-        return idCliente;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
     
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.idCliente);
+        hash = 89 * hash + Objects.hashCode(this.idUser);
         hash = 89 * hash + Objects.hashCode(this.idObjetivo);
         return hash;
     }
@@ -64,7 +57,7 @@ public class ObjetivoClienteId implements Serializable{
             return false;
         }
         final ObjetivoClienteId other = (ObjetivoClienteId) obj;
-        if (!Objects.equals(this.idCliente, other.idCliente)) {
+        if (!Objects.equals(this.idUser, other.idUser)) {
             return false;
         }
         if (!Objects.equals(this.idObjetivo, other.idObjetivo)) {
@@ -75,7 +68,7 @@ public class ObjetivoClienteId implements Serializable{
 
     @Override
     public String toString() {
-        return "ObjetivoUserId{" + "edad=" + idCliente + ", idObjetivo=" + idObjetivo + '}';
+        return "ObjetivoUserId{" + "edad=" + idUser + ", idObjetivo=" + idObjetivo + '}';
     }
 
    
