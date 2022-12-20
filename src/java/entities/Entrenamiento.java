@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 
 @Entity
-@Table(name="entrenamiento", schema="Fuerza_G3")
+@Table(name="Entrenamiento", schema="Fuerza_G3")
 @XmlRootElement
 public class Entrenamiento implements Serializable {
 
@@ -62,7 +62,7 @@ public class Entrenamiento implements Serializable {
     
    
     @ManyToMany ()
-    //@JoinTable(name="admin_entrenamiento", schema="Fuerza_G3")
+    @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
     private Set<Admin> admin;
 
 

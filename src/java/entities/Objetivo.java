@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 
 @Entity
-@Table(name="objetivo", schema="Fuerza_G3")
+@Table(name="Objetivo", schema="Fuerza_G3")
 @XmlRootElement
 public class Objetivo implements Serializable {
 

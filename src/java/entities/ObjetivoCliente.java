@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Diego Y Jessica
  */
 @Entity
-@Table(name="objetivoCliente", schema="Fuerza_G3")
+@Table(name="ObjetivoCliente", schema="Fuerza_G3")
 @XmlRootElement
 public class ObjetivoCliente implements Serializable {
 

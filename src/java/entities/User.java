@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author 2dam
  */
 @Entity
-@Table(name="user", schema="Fuerza_G3")
+@Table(name="User", schema="Fuerza_G3")
 @DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement

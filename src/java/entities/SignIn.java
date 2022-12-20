@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Diego y Jessica
  */
 @Entity
-@Table(name="signIn", schema="Fuerza_G3")
+@Table(name="SignIn", schema="Fuerza_G3")
 @XmlRootElement
 public class SignIn implements Serializable {
 
