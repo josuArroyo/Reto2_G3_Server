@@ -5,16 +5,13 @@
  */
 package entities;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,9 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @DiscriminatorValue("AD")
-@Table(name="administrador", schema="Fuerza_G3")
 @XmlRootElement
-public class Admin extends User {
+public class Admin extends User{
 
     private static final long serialVersionUID = 1L;
     

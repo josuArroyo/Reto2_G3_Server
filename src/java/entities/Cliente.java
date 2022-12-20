@@ -5,15 +5,11 @@
  */
 package entities;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -23,13 +19,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @DiscriminatorValue("CL")
-@Table(name="cliente",schema="Fuerza_G3")
 @XmlRootElement
-public class Cliente extends User {
+public class Cliente extends User{
 
     private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  
 
     private int edad;
     private User user;
@@ -37,7 +32,8 @@ public class Cliente extends User {
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    private Set<Objetivo> listaObjetivo;
+    @OneToMany (mappedBy = "cliente")
+    private Set<ObjetivoCliente> listaObjetivoCliente;
 
     /**
      * @associates <{uml.Evento}>
@@ -45,14 +41,16 @@ public class Cliente extends User {
     @ManyToMany(mappedBy="listaCliente")
     private Set<Evento> listaEvento;
 
-    public void setListaObjetivo(Set<Objetivo> listaObjetivo) {
-        this.listaObjetivo = listaObjetivo;
+    @XmlTransient
+    public Set<ObjetivoCliente> getListaObjetivoCliente() {
+        return listaObjetivoCliente;
     }
 
-    
-    public Set<Objetivo> getListaObjetivo() {
-        return listaObjetivo;
+    public void setListaObjetivoCliente(Set<ObjetivoCliente> listaObjetivoCliente) {
+        this.listaObjetivoCliente = listaObjetivoCliente;
     }
+
+   
 
     public void setListaEvento(Set<Evento> listaEvento) {
         this.listaEvento = listaEvento;
