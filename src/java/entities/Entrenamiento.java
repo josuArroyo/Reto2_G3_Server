@@ -62,8 +62,7 @@ public class Entrenamiento implements Serializable {
     
    
     @ManyToMany(mappedBy = "listaEntrenamiento")
-  //  @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
-   // private Admin admin;
+    @JoinTable(name="admin_entrenamieto", schema="Fuerza_G3")
     private Set<Admin> admin;
 
 
