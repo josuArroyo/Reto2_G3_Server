@@ -64,7 +64,7 @@ public class Evento implements Serializable {
      */
     
     @ManyToMany()
-    @NotNull
+    @JoinTable(name="event_customer",schema="fuerza_g3")
     private Set<Cliente> listaCliente;
 
 
