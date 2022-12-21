@@ -46,8 +46,8 @@ public class Entrenamiento implements Serializable {
     private Integer duracion;
     
     
-    @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
-    @Temporal (TemporalType.DATE)
+    @NotNull
+    @Temporal (TemporalType.TIMESTAMP)
     private Date fechaPeriod;
     
   
