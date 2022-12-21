@@ -46,8 +46,7 @@ public class Evento implements Serializable {
     
     private String descripcion;
     
-    @Temporal(TemporalType.DATE)
-    @Pattern(regexp="^\\d{4}-\\d{2}-\\d{2}$")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     
     

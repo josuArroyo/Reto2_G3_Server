@@ -50,8 +50,7 @@ public class Lugar implements Serializable {
     @Column
     private String tipoLugar;
 
-    @Temporal(TemporalType.DATE)
-    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date tiempo;
 
     /**
