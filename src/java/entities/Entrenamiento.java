@@ -27,49 +27,41 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Jessica
  */
-
 @Entity
-@Table(name="Entrenamiento", schema="Fuerza_G3")
+@Table(name = "Entrenamiento", schema = "Fuerza_G3")
 @XmlRootElement
 public class Entrenamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-   
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idEntrenamiento;
-    
- 
+
     private String descripcion;
-    
-   
+
     private Integer duracion;
+
     
-    
-    @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
-    @Temporal (TemporalType.DATE)
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPeriod;
-    
-  
+
     private Integer intensidad;
-    
-    
+
     private Integer repeticion;
-    
-  
+
     @ManyToOne
     private Objetivo objetivo;
-    
-   
-    @ManyToMany ()
-    @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
-    private Set<Admin> admin;
 
+    @ManyToMany()
+    @JoinTable(name = "adminEntrenamiento", schema = "Fuerza_G3")
+    private Set<Admin> admin;
 
     public void setIdEntrenamiento(Integer idEntrenamiento) {
         this.idEntrenamiento = idEntrenamiento;
     }
-    
+
     public Integer getIdEntrenamiento() {
         return idEntrenamiento;
     }
@@ -90,8 +82,6 @@ public class Entrenamiento implements Serializable {
     public void setAdmin(Set<Admin> admin) {
         this.admin = admin;
     }
-
-   
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
@@ -157,5 +147,5 @@ public class Entrenamiento implements Serializable {
     public String toString() {
         return "entities.Entrenamiento[ id=" + idEntrenamiento + " ]";
     }
-    
+
 }

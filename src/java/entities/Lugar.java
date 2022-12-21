@@ -7,10 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -50,8 +48,8 @@ public class Lugar implements Serializable {
     @Column
     private String tipoLugar;
 
-    @Temporal(TemporalType.DATE)
-    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date tiempo;
 
     /**
