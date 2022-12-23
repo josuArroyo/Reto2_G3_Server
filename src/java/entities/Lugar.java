@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,6 +31,27 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name ="Lugar", schema = "Fuerza_G3")
+
+@NamedQueries({
+    
+    @NamedQuery(
+            name="findAllLocations", query="SELECT * FROM lugar "
+    ),
+    @NamedQuery(
+            name="findAllLocationsByType", query="SELECT * FROM lugar ORDER BY tipoLugar ASC"
+    )
+    /*
+    @NamedQuery(
+            name="insertNewLocation", query="INSERT INTO lugar (descripcion, nombre, tiempo, tipoLugar) VALUES(?,?,?.?) "
+    ),
+    @NamedQuery(
+            name="DelateLocation", query="DELETE lugar WHERE idLugar = ? "
+    ),
+    @NamedQuery(
+            name="ModifyLocation", query="UPDATE lugar SET descripcion = ?, nombre = ?, tiempo = ?, tipoLugar = ? "
+    )
+    */
+})
 
 @XmlRootElement
 public class Lugar implements Serializable {
