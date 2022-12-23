@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name="ObjetivoCliente", schema="Fuerza_G3")
+@NamedQueries({
+    //@NamedQuery(name="createObjective", query="INSERT INTO ObjetivoCliente VALUES(User.idUser,Objetivo.idObjetivo,NOW())"),
+    @NamedQuery(name="filterObjectivesByDate", query="SELECT * FROM ObjetivoCliente ORDER BY fechaCon ASC")
+})
 @XmlRootElement
 public class ObjetivoCliente implements Serializable {
 

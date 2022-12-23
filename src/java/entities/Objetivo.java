@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,6 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="Objetivo", schema="Fuerza_G3")
+
+@NamedQueries({
+    @NamedQuery(name="viewObjective", query="SELECT * FROM Objetivo ORDER BY Objetivo.idObjetivo"),
+    //@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
+    //@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
+    //@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
+})
 @XmlRootElement
 public class Objetivo implements Serializable {
 
