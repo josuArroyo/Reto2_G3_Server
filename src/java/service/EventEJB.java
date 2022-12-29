@@ -11,6 +11,7 @@ import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,42 +27,80 @@ public class EventEJB implements EventInterface{
     
     @Override
     public void deleteEvent(Evento event) throws DeleteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.remove(em.merge(event));
+        }catch(Exception e) {
+            throw new DeleteException(e.getMessage());
+        }
     }
 
     @Override
-    public Evento viewEvents(Evento event) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Evento> viewEvents() throws ReadException {
+        List<Evento> events;
+        try {
+            events = em.createNamedQuery("viewAllEvents").getResultList();
+        }catch(Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        return events;
     }
 
     @Override
     public void createEvent(Evento event) throws CreateException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.persist(event);
+        }catch(Exception e) {
+            throw new CreateException(e.getMessage());
+        }
     }
 
     @Override
     public void modifyEvent(Evento event) throws UpdateException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            if(!em.contains(event))
+                em.merge(event);
+            em.flush();
+        }catch(Exception e) {
+            throw new UpdateException(e.getMessage());
+        }
     }
 
     @Override
-    public Set<Evento> findEventByParticipants(Evento event, Integer numPart) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Evento findEventByParticipants(Integer numPart) throws ReadException {
+        Evento event;
+        try {
+            event = em.find(Evento.class, numPart);
+        }catch(Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        return event;
     }
 
     @Override
-    public Set<Evento> findEventByDate(Evento event, Date fecha) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Evento findEventByDate(Date fecha) throws ReadException {
+        Evento event;
+        try {
+            event = em.find(Evento.class, fecha);
+        }catch(Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        return event;
     }
 
     @Override
-    public Set<Evento> findEventByType(Evento event, String tipoEvento) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Evento findEventByType(String tipoEvento) throws ReadException {
+        Evento event;
+        try {
+            event = em.find(Evento.class, tipoEvento);
+        }catch(Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        return event; 
     }
 
     @Override
     public void subscribeToEvent(Evento event) throws UpdateException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

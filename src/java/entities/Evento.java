@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name="Evento",schema="Fuerza_G3")
+
+@NamedQueries({
+    @NamedQuery(name="viewEvent", query="SELECT e FROM Evento e ORDER BY e.idEvento")
+})
+
 @XmlRootElement
 public class Evento implements Serializable {
 
