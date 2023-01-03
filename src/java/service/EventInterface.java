@@ -26,5 +26,5 @@ public interface EventInterface {
     public Evento findEventByParticipants(Integer numPart) throws ReadException;
     public Evento findEventByDate(Date fecha) throws ReadException;
     public Evento findEventByType(String tipoEvento) throws ReadException;
-    public void subscribeToEvent(Evento event) throws UpdateException;
+    public void subscribeToEvent(Integer numPart) throws UpdateException;
 }

@@ -13,6 +13,7 @@ import exceptions.UpdateException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -20,6 +21,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author Ale
  */
+@Stateless
 public class EventEJB implements EventInterface{
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
@@ -99,8 +101,12 @@ public class EventEJB implements EventInterface{
     }
 
     @Override
-    public void subscribeToEvent(Evento event) throws UpdateException {
-        
-    }
-    
+    public void subscribeToEvent(Integer numPart) throws UpdateException {
+        try{
+            if(!em.contains(numPart))
+                em.createNamedQuery("suscribeToEvent").getResultList();
+        }catch(Exception e) {
+           throw new UpdateException(e.getMessage()); 
+        }                
+    } 
 }
