@@ -48,7 +48,7 @@ public class EventoFacadeREST {
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void createEvent(Evento event) {        
+    public void createEvent(@PathParam("idEvento") Integer idEvento, Evento event) {        
         try {
             inter.createEvent(event);
         } catch (CreateException e) {
@@ -56,17 +56,17 @@ public class EventoFacadeREST {
         }       
     }
 
-    //mal???
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void modifyEvent(Evento event) {
+    public void modifyEvent(@PathParam("idEvento") Integer idEvento, Evento event) {
         try {
             inter.modifyEvent(event);
         } catch (UpdateException e) {
+            System.out.println(e);
              throw new InternalServerErrorException(e.getMessage());
         }
     }
-    
+/*
     //mal???
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -74,15 +74,17 @@ public class EventoFacadeREST {
         try {
             inter.subscribeToEvent(numPart);
         } catch (UpdateException e) {
+            System.out.println(e);
             throw new InternalServerErrorException(e.getMessage());
         }
     }
-
+*/
     @DELETE
-    public void deleteEvent(Evento event) {
+    @Path("{DELETEByidEvento}")
+    public void deleteEvent(@PathParam("idEvento") Integer idEvento, Evento event) {
         try {
-            inter.deleteEvent(event);
-        }catch(DeleteException e) {
+            inter.deleteEvent(inter.filterEventById(idEvento));
+        }catch(DeleteException | ReadException e) {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
@@ -98,7 +100,7 @@ public class EventoFacadeREST {
     }
 
     @GET
-    @Path("{numPart}")
+    @Path("/GET/Integer{numPart}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Evento findEventByParticipants(@PathParam("numPart") Integer numPart) {
         try {
@@ -109,7 +111,7 @@ public class EventoFacadeREST {
     }
     
     @GET
-    @Path("{fecha}")
+    @Path("/GET/Date{fecha}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Evento findEventByDate(@PathParam("fecha") Date fecha) {
         try {
@@ -120,7 +122,7 @@ public class EventoFacadeREST {
     }
     
     @GET
-    @Path("{tipoEvento}")
+    @Path("/GET/String{tipoEvento}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Evento findEventByType(@PathParam("tipoEvento") String tipoEvento) {
         try {

@@ -19,6 +19,7 @@ import java.util.Set;
  * @author Ale
  */
 public interface EventInterface {
+    public Evento filterEventById(Integer idEvento) throws ReadException;
     public void deleteEvent(Evento event) throws DeleteException;
     public List<Evento> viewEvents() throws ReadException;
     public void createEvent(Evento event) throws CreateException;

@@ -38,7 +38,7 @@ public class EventEJB implements EventInterface{
 
     @Override
     public List<Evento> viewEvents() throws ReadException {
-        List<Evento> events;
+        List<Evento> events = null;
         try {
             events = em.createNamedQuery("viewAllEvents").getResultList();
         }catch(Exception e) {
@@ -109,4 +109,15 @@ public class EventEJB implements EventInterface{
            throw new UpdateException(e.getMessage()); 
         }                
     } 
+
+    @Override
+    public Evento filterEventById(Integer idEvento) throws ReadException {
+      Evento event = null;
+      try {
+          event = em.find(Evento.class, idEvento);
+      }catch(Exception e) {
+          throw new ReadException(e.getMessage());
+      }
+        return event;
+    }
 }

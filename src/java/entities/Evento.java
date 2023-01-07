@@ -33,10 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name="Evento",schema="Fuerza_G3")
 
 @NamedQueries({
-    @NamedQuery(name="findEventByParticipants", query="SELECT e FROM Evento e WHERE e.numPart=:numPart"),
-    @NamedQuery(name="findEventByDate", query="SELECT e FROM Evento e WHERE e.fecha=:fecha"),
-    @NamedQuery(name="findEventByType", query="SELECT e FROM Evento e WHERE e.tipoEvento=:tipoEvento"),
-    @NamedQuery(name="suscribeToEvent", query="UPDATE Evento e SET e.numPart = e.numPart + 1 WHERE e.idEvento=:idEvento")
+    @NamedQuery(name="viewAllEvents", query="SELECT e FROM Evento e ORDER BY e.idEvento"),
+    @NamedQuery(name="findEventByParticipants", query="SELECT e FROM Evento e WHERE e.numPart = :numPart"),
+    @NamedQuery(name="findEventByDate", query="SELECT e FROM Evento e WHERE e.fecha = :fecha"),
+    @NamedQuery(name="findEventByType", query="SELECT e FROM Evento e WHERE e.tipoEvento = :tipoEvento"),
+    @NamedQuery(name="suscribeToEvent", query="UPDATE Evento e SET e.numPart = e.numPart + 1 WHERE e.idEvento = :idEvento")
 })
 
 @XmlRootElement
