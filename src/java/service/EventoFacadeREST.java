@@ -80,8 +80,8 @@ public class EventoFacadeREST {
     }
 */
     @DELETE
-    @Path("{DELETEByidEvento}")
-    public void deleteEvent(@PathParam("idEvento") Integer idEvento, Evento event) {
+    @Path("DELETE-Evento/{idEvento}")
+    public void deleteEvent(@PathParam("idEvento") Integer idEvento) {
         try {
             inter.deleteEvent(inter.filterEventById(idEvento));
         }catch(DeleteException | ReadException e) {

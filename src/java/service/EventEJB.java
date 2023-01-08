@@ -112,7 +112,7 @@ public class EventEJB implements EventInterface{
 
     @Override
     public Evento filterEventById(Integer idEvento) throws ReadException {
-      Evento event = null;
+      Evento event;
       try {
           event = em.find(Evento.class, idEvento);
       }catch(Exception e) {
