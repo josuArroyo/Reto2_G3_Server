@@ -12,7 +12,8 @@ import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 
 /**
  *
@@ -30,10 +31,10 @@ public interface ObjectiveInterface {
     
     public void deleteObjectiveClient(Objetivo objetivo) throws DeleteException;
     
-    public Objetivo viewObjective(Objetivo objetivo) throws ReadException;
+    public List<Objetivo> viewObjective() throws ReadException;
     
-    public Set<ObjetivoCliente> filterObjectiveByDate(Date fechaCon) throws ReadException;
+    public Objetivo filterObjectiveById(Integer id) throws ReadException;
     
-    public ObjetivoCliente selectObjectiveClient(Objetivo objetivo, ObjetivoCliente objetivoCliente) throws ReadException;
+    
     
 }

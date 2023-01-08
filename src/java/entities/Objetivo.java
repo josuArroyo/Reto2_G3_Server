@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name="Objetivo", schema="Fuerza_G3")
 
 @NamedQueries({
-    @NamedQuery(name="viewObjective", query="SELECT * FROM Objetivo ORDER BY Objetivo.idObjetivo"),
+    @NamedQuery(name="viewObjective", query="SELECT o FROM Objetivo o ORDER BY o.idObjetivo"),
+    
     //@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
     //@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
     //@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")

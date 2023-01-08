@@ -12,7 +12,9 @@ import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
@@ -21,7 +23,8 @@ import javax.persistence.TemporalType;
  *
  * @author Diego
  */
-/*public class ObjetivoEJB implements ObjectiveInterface {
+@Stateless
+public class ObjetivoEJB implements ObjectiveInterface {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
@@ -80,43 +83,31 @@ import javax.persistence.TemporalType;
     }
     
     @Override
-
-    @Override
-    public Objetivo viewObjective(Objetivo objetivo) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Set<ObjetivoCliente> filterObjectiveByDate(Date fechaCon) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ObjetivoCliente selectObjectiveClient(Objetivo objetivo, ObjetivoCliente objetivoCliente) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    //This method shows info from ObjetivoCLiente by it´s fechaCon Date parameter, returns ObjetivoCliente
-    public Set<ObjetivoCliente> filterObjectiveByDate(Date fechaCon) throws ReadException {
-        Set<ObjetivoCliente> objetivoClientes;
+    //This method shows all objetives
+    public List<Objetivo> viewObjective() throws ReadException {
+        List<Objetivo> objetivo = null;
         try{
-           //objetivoClientes = em.createQuery("filterObjectivesByDate").setParameter("fechaCon", em.find(objetivoClientes, fechaCon));
+            objetivo = 
+                     em.createNamedQuery("viewObjective").getResultList();
         }catch(Exception e){
             throw new ReadException(e.getMessage());
         }
-        
-        return objetivoClientes;
-    }
-
-    
-    public Objetivo viewObjective(Objetivo objetivo) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return objetivo;
     }
 
     @Override
-    public ObjetivoCliente selectObjectiveClient(Objetivo objetivo, ObjetivoCliente objetivoCliente) throws ReadException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //This method is used to view the objectives by it´s ids
+    public Objetivo filterObjectiveById(Integer id) throws ReadException {
+        Objetivo objetivo;
+        try{
+             objetivo = em.find(Objetivo.class, id);
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+            
+        }
+        return objetivo;
     }
 
     
-    
-}*/
+     
+}

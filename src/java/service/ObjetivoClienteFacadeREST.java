@@ -7,13 +7,17 @@ package service;
 
 import entities.ObjetivoCliente;
 import entities.ObjetivoClienteId;
+import exceptions.ReadException;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -26,12 +30,16 @@ import javax.ws.rs.core.PathSegment;
  *
  * @author 2dam
  */
-@Stateless
+//@Stateless
 @Path("entities.objetivocliente")
-public class ObjetivoClienteFacadeREST extends AbstractFacade<ObjetivoCliente> {
+public class ObjetivoClienteFacadeREST {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
+    
+     @EJB
+    private ObjectiveClientInterface inter2;   
+
 
     private ObjetivoClienteId getPrimaryKey(PathSegment pathSegment) {
         /*
@@ -55,46 +63,52 @@ public class ObjetivoClienteFacadeREST extends AbstractFacade<ObjetivoCliente> {
     }
 
     public ObjetivoClienteFacadeREST() {
-        super(ObjetivoCliente.class);
+        //super(ObjetivoCliente.class);
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(ObjetivoCliente entity) {
-        super.create(entity);
+        //super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") PathSegment id, ObjetivoCliente entity) {
-        super.edit(entity);
+        //super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") PathSegment id) {
         entities.ObjetivoClienteId key = getPrimaryKey(id);
-        super.remove(super.find(key));
+        //super.remove(super.find(key));
     }
 
     @GET
-    @Path("{id}")
+    @Path("{Date}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ObjetivoCliente find(@PathParam("id") PathSegment id) {
-        entities.ObjetivoClienteId key = getPrimaryKey(id);
-        return super.find(key);
+    public ObjetivoCliente find(@PathParam("fechaCon") Date fechaCon) {
+        try{
+            return inter2.filterObjectiveByDate(fechaCon);
+        }catch(ReadException e){
+            throw new InternalServerErrorException(e.getMessage());
+        }
+        
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<ObjetivoCliente> findAll() {
-        return super.findAll();
+        try{
+            return inter2.viewObjectiveClient();
+        }catch(ReadException e){
+            throw new InternalServerErrorException(e.getMessage());
+        }
     }
 
-    @GET
+    /*@GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<ObjetivoCliente> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
@@ -106,9 +120,9 @@ public class ObjetivoClienteFacadeREST extends AbstractFacade<ObjetivoCliente> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
-    }
+    }*/
 
-    @Override
+    
     protected EntityManager getEntityManager() {
         return em;
     }
