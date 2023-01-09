@@ -11,6 +11,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public interface EntrenamientoInterface {
     
     public void createEntrenamiento(Entrenamiento entrenamineto) throws CreateException;
     
-    public Set <Entrenamiento> viewAllEntrenamientos() throws ReadException;
+    public List <Entrenamiento> viewAllEntrenamientos() throws ReadException;
     
     public Entrenamiento viewByDuration (Integer duracion) throws ReadException;
     
@@ -32,6 +33,8 @@ public interface EntrenamientoInterface {
     public void modifyEntrenamiento (Entrenamiento entrenamiento) throws UpdateException;
     
     public void deleteEntrenamiento (Entrenamiento entrenamiento) throws DeleteException;
+    
+    
     
     
      

@@ -11,7 +11,9 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
+import java.util.List;
 import java.util.Set;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -19,6 +21,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author 2dam
  */
+@Stateless
 public class EntrenamientoEJB implements EntrenamientoInterface {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
@@ -37,15 +40,15 @@ public class EntrenamientoEJB implements EntrenamientoInterface {
     }
 
     @Override
-    public Set<Entrenamiento> viewAllEntrenamientos() throws ReadException {
+    public List<Entrenamiento> viewAllEntrenamientos() throws ReadException {
        //Metodo para mostrar todos los entrenamientos
-        Set<Entrenamiento> entrenamiento = null;
+        List<Entrenamiento> entrenamiento = null;
         try {
-            entrenamiento = (Set<Entrenamiento>) em.createNamedQuery("viewAllEntrenamientos").getResultList();;
+            entrenamiento = em.createNamedQuery("viewAllEntrenamientos").getResultList();;
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
-        return (Set<Entrenamiento>) entrenamiento;
+        return entrenamiento;
     }
 
     @Override
