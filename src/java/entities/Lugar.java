@@ -5,6 +5,8 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -30,17 +32,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author 2dam,josuA
  */
 @Entity
-@Table(name ="Lugar", schema = "Fuerza_G3")
+@Table(name = "Lugar", schema = "Fuerza_G3")
 
 @NamedQueries({
-    
-    @NamedQuery(
-            name="findAllLocations", query="SELECT * FROM lugar "
-    ),
-    @NamedQuery(
-            name="findAllLocationsByType", query="SELECT * FROM lugar ORDER BY tipoLugar ASC"
+    @NamedQuery(name = "findAllLocations",
+            query = "SELECT l FROM Lugar l ORDER BY l.idLugar DESC"
     )
-    /*
+    ,
+    @NamedQuery(
+            name = "findAllLocationsByType",
+            query = "SELECT l FROM Lugar l WHERE l.tipoLugar = :tipoLugar"
+    )
+/*
     @NamedQuery(
             name="insertNewLocation", query="INSERT INTO lugar (descripcion, nombre, tiempo, tipoLugar) VALUES(?,?,?.?) "
     ),
@@ -50,7 +53,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name="ModifyLocation", query="UPDATE lugar SET descripcion = ?, nombre = ?, tiempo = ?, tipoLugar = ? "
     )
-    */
+ */
 })
 
 @XmlRootElement
@@ -71,8 +74,9 @@ public class Lugar implements Serializable {
     @Column
     private String tipoLugar;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(as = Date.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date tiempo;
 
     /**

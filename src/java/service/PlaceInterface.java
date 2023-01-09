@@ -10,6 +10,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,8 +25,8 @@ public interface PlaceInterface {
 
     public void modifyPlace(Lugar lugar) throws UpdateException;
 
-    public Set<Lugar> viewPlaces() throws ReadException;
+    public List<Lugar> viewPlaces() throws ReadException;
 
-    public Lugar viewPlacesById(Integer idLugar) throws ReadException;
+    public Lugar viewPlacesById(Integer id) throws ReadException;
 
 }
