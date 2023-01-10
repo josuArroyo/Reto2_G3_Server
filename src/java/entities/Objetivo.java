@@ -41,7 +41,6 @@ public class Objetivo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
     private Integer idObjetivo;
     
    
@@ -61,7 +60,7 @@ public class Objetivo implements Serializable {
      */
     
 //Relaciones
-    @OneToMany (mappedBy="objetivo")
+    @OneToMany(mappedBy="objetivo")
     private Set<ObjetivoCliente> listaClientes;
 
     

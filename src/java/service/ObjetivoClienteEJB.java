@@ -24,6 +24,7 @@ public class ObjetivoClienteEJB implements ObjectiveClientInterface{
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
     
+    @Override
     public ObjetivoCliente filterObjectiveByDate(Date fechaCon) throws ReadException {
         //This method shows info from ObjetivoCLiente by it´s fechaCon Date parameter.
         ObjetivoCliente objetivoCliente;
@@ -31,7 +32,7 @@ public class ObjetivoClienteEJB implements ObjectiveClientInterface{
             objetivoCliente =
                     em.find(ObjetivoCliente.class, fechaCon);
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
         }
         return objetivoCliente;
@@ -42,7 +43,7 @@ public class ObjetivoClienteEJB implements ObjectiveClientInterface{
         List<ObjetivoCliente> objetivoClie = null;
         try{
             objetivoClie = 
-                     em.createNamedQuery("viewObjective").getResultList();
+                     em.createNamedQuery("viewAllTables").getResultList();
         }catch(Exception e){
             throw new ReadException(e.getMessage());
         }

@@ -66,7 +66,7 @@ public class ObjetivoClienteFacadeREST {
         //super(ObjetivoCliente.class);
     }
 
-    @POST
+    /*@POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(ObjetivoCliente entity) {
         //super.create(entity);
@@ -84,10 +84,10 @@ public class ObjetivoClienteFacadeREST {
     public void remove(@PathParam("id") PathSegment id) {
         entities.ObjetivoClienteId key = getPrimaryKey(id);
         //super.remove(super.find(key));
-    }
+    }*/
 
     @GET
-    @Path("{Date}")
+    @Path("{fechaCon}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public ObjetivoCliente find(@PathParam("fechaCon") Date fechaCon) {
         try{

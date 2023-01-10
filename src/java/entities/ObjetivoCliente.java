@@ -30,8 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="ObjetivoCliente", schema="Fuerza_G3")
 @NamedQueries({
+    @NamedQuery(name="viewAllTables", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC")
     //@NamedQuery(name="createObjective", query="INSERT INTO ObjetivoCliente VALUES(User.idUser,Objetivo.idObjetivo,NOW())"),
-    @NamedQuery(name="filterObjectivesByDate", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC")
+    //@NamedQuery(name="filterObjectivesByDate", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC")
 })
 @XmlRootElement
 public class ObjetivoCliente implements Serializable {
@@ -53,7 +54,7 @@ public class ObjetivoCliente implements Serializable {
     
     
     
-    @Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
+    //@Pattern(regexp = "^\\d(4)-\\d(2)-\\d(2)$")
     @Temporal(TemporalType.DATE)
     private Date fechaCon;
     

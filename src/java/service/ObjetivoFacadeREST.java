@@ -68,7 +68,7 @@ public class ObjetivoFacadeREST {
     }
 
     @DELETE
-    @Path("{DeleteById}")
+    @Path("deleteObjectiveAdmin/{id}")
     public void remove(@PathParam("id") Integer id) {
         try{
             inter.deleteObjectiveAdmin(inter.filterObjectiveById(id));
@@ -78,17 +78,17 @@ public class ObjetivoFacadeREST {
         }
     }
 
-    /*@GET
-    @Path("{GET/id}")
+    @GET
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Objetivo find(@PathParam("Id") Integer Id) {
+    public Objetivo find(@PathParam("id") Integer id) {
         try{
-            return inter.filterObjectiveById(Id);
+            return inter.filterObjectiveById(id);
         }catch(ReadException e){
            
             throw new InternalServerErrorException(e.getMessage());
         }
-    }*/
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
