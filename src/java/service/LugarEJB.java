@@ -86,6 +86,19 @@ public class LugarEJB implements PlaceInterface {
 
     }
 
+    @Override
+    public List<Lugar> viewPlacesByType(String tipoLugar) throws ReadException {
+        List<Lugar> lugar;
+        try {
+            lugar =em.createNamedQuery("findAllLocationsByType").setParameter("tipoLugar", tipoLugar).getResultList();
+            //lugar=em.find(Lugar.class, tipoLugar);
+        } catch (Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        
+        return lugar;
+    }
+
 
     
 }

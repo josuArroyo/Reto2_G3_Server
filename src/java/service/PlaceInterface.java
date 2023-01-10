@@ -29,4 +29,5 @@ public interface PlaceInterface {
 
     public Lugar viewPlacesById(Integer id) throws ReadException;
 
+    public List<Lugar> viewPlacesByType(String tipoLugar) throws ReadException;
 }

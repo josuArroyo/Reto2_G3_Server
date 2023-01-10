@@ -103,6 +103,20 @@ public class LugarFacadeREST {
         }
 
     }
+    
+    @GET
+    @Path("findByType/{tipoLugar}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Lugar> findByType(@PathParam("tipoLugar") String tipoLugar) {
+        try {
+            return pli.viewPlacesByType(tipoLugar);
+        } catch (ReadException ex) {
+            System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+
+    }
+    
 
     /*
     @GET
