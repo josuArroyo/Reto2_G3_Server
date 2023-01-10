@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.omg.CORBA.PERSIST_STORE;
 
 /**
  *
@@ -36,22 +40,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @NamedQueries({
     @NamedQuery(
-            name = "findAllTraining", query = "SELECT E FROM Entrenamiento E"
+            name = "viewAllTraining", query = "SELECT E FROM Entrenamiento E"
     )
     ,
      @NamedQuery(
-            name = "findByDuration", query = "SELECT E.duracion FROM Entrenamiento E"
+            name = "viewByDuration", query = "SELECT E FROM Entrenamiento E where E.duracion=:duracion"
     )
     ,
       @NamedQuery(
-            name = "findByIntensity", query = "SELECT E.intensidad FROM Entrenamiento E"
+            name = "viewByIntensity", query = "SELECT E FROM Entrenamiento E where E.intensidad=:intensidad"
     )
     ,
 //      @NamedQuery(
 //            name="insertNewTraining", query="INSERT INTO entrenamiento (descripcion, duracion, fechaPeriod, intensidad, repeticion) VALUES(?,?,?,?,?,?,"
 //      ),
        @NamedQuery(
-            name = "getByObjective", query = "SELECT E.objetivo FROM Entrenamiento E"
+            name = "viewByObjective", query = "SELECT E FROM Entrenamiento E where E.objetivo=:objetivo"
     ), //        @NamedQuery(
 //            name="deleteTraining", query="DELETE ENTRENAMIENTO WHERE idEntrenamiento = ?"
 //      ),
@@ -83,7 +87,7 @@ public class Entrenamiento implements Serializable {
 
     private Integer repeticion;
 
-    @ManyToOne
+    @ManyToOne(cascade = MERGE)
     private Objetivo objetivo;
 
     @ManyToMany()

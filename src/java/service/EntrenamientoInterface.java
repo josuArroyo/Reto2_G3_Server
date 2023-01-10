@@ -20,15 +20,17 @@ import java.util.Set;
  */
 public interface EntrenamientoInterface {
     
-    public void createEntrenamiento(Entrenamiento entrenamineto) throws CreateException;
+    public void createEntrenamiento(Entrenamiento entrenamiento) throws CreateException;
     
     public List <Entrenamiento> viewAllEntrenamientos() throws ReadException;
     
-    public Entrenamiento viewByDuration (Integer duracion) throws ReadException;
+    public Entrenamiento viewById(Integer idEntrenamiento) throws ReadException;
     
-    public Entrenamiento viewByIntensity (Integer intensdidad)throws ReadException;
+    public List <Entrenamiento> viewByDuration (Integer duracion) throws ReadException;
+    
+    public List <Entrenamiento> viewByIntensity (Integer intensidad)throws ReadException;
             
-    public Entrenamiento viewByObjetivo (Objetivo objetivo) throws ReadException;
+    public List <Entrenamiento> viewByObjetivo (Integer idObjetivo) throws ReadException;
     
     public void modifyEntrenamiento (Entrenamiento entrenamiento) throws UpdateException;
     

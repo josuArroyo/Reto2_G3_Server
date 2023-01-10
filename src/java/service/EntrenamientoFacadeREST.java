@@ -11,6 +11,8 @@ import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -35,19 +37,21 @@ public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
-    @EJB
     
+    @EJB
     private EntrenamientoInterface einterface;
+    
 
-    Entrenamiento entrenamiento;
+    Entrenamiento entrenamiento = new Entrenamiento();
     
     public EntrenamientoFacadeREST() {
         super(Entrenamiento.class);
     }
 
+    @Override
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Entrenamiento entity) {
+    public void create(Entrenamiento entrenamiento) {
         try {
             einterface.createEntrenamiento(entrenamiento);
         } catch (CreateException ex) {
@@ -58,7 +62,7 @@ public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
 
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Entrenamiento entity) {
+    public void edit(@PathParam("id") Integer id, Entrenamiento entrenamiento) {
          try {
             einterface.modifyEntrenamiento(entrenamiento);
         } catch (UpdateException ex) {
@@ -71,23 +75,70 @@ public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
     @Path("deleteTraining/{id}")
     public void remove(@PathParam("id") Integer id) {
             try {
-            einterface.deleteEntrenamiento((Entrenamiento) einterface.viewAllEntrenamientos());
-        } catch (ReadException | DeleteException ex) {
+            einterface.deleteEntrenamiento(einterface.viewById(id));
+        } catch (DeleteException ex) {
+            throw new InternalServerErrorException(ex.getMessage());
+        } catch (ReadException ex) {
+            Logger.getLogger(EntrenamientoFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+     
+    @GET
+    @Path("getEntrenamientoId/{idEntrenamiento}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Entrenamiento findById(@PathParam("idEntrenamiento") Integer id) {
+        Entrenamiento lista;
+          try {
+              lista = einterface.viewById(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    @GET
+    @Path("getEntrenamientoObjetivo/{idObjetivo}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Entrenamiento> findObjetivo(@PathParam("idObjetivo") Integer id) {
+        List<Entrenamiento> lista;
+          try {
+              lista = einterface.viewByObjetivo(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    @GET
+    @Path("getEntrenamientoInsensidad/{intensidad}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Entrenamiento> findIntensidad(@PathParam("intensidad") Integer id) {
+        List<Entrenamiento> lista;
+          try {
+              lista = einterface.viewByIntensity(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
         }
     }
 
     @GET
-    @Path("{id}")
+    @Path("getEntrenamientoDuracion/{duracion}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Entrenamiento find(@PathParam("id") Integer id) {
+   public List<Entrenamiento> findDuracion(@PathParam("duracion") Integer id) {
+        List<Entrenamiento> lista;
           try {
-            return (Entrenamiento) einterface.viewByIntensity(id);
+              lista = einterface.viewByDuration(id);
+            return  lista;
         } catch (ReadException ex) {
             throw new InternalServerErrorException(ex.getMessage());
         }
     }
-
+    
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Entrenamiento> findAll() {

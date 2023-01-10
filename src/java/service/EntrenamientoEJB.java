@@ -31,6 +31,13 @@ public class EntrenamientoEJB implements EntrenamientoInterface {
     public void createEntrenamiento(Entrenamiento entrenamiento) throws CreateException {
         //Metodo para  crear entrenamientos.
         try {
+            if (entrenamiento.getIdEntrenamiento() == null){
+                em.merge(entrenamiento);
+            }
+            if (!em.contains(entrenamiento.getObjetivo())) {
+                em.merge(entrenamiento.getObjetivo());
+            }
+                
             em.persist(entrenamiento);
         } catch (Exception e) {
 
@@ -44,7 +51,7 @@ public class EntrenamientoEJB implements EntrenamientoInterface {
        //Metodo para mostrar todos los entrenamientos
         List<Entrenamiento> entrenamiento = null;
         try {
-            entrenamiento = em.createNamedQuery("viewAllEntrenamientos").getResultList();;
+            entrenamiento = em.createNamedQuery("viewAllTraining").getResultList();;
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
@@ -52,40 +59,40 @@ public class EntrenamientoEJB implements EntrenamientoInterface {
     }
 
     @Override
-    public Entrenamiento viewByDuration(Integer duracion) throws ReadException {
+    public List <Entrenamiento> viewByDuration(Integer duracion) throws ReadException {
         //Metodo para mostrar los entrenamientos por la duracion
-        Entrenamiento entrenamiento = null;
+        List <Entrenamiento> list;
         try {
-            entrenamiento = em.find(Entrenamiento.class, duracion);
+            list = em.createNamedQuery("viewByDuration").setParameter("duracion", duracion).getResultList();
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
-        return entrenamiento;
+        return list;
 
     }
 
     @Override
-    public Entrenamiento viewByIntensity(Integer intensdidad) throws ReadException {
+    public List <Entrenamiento> viewByIntensity(Integer intensidad) throws ReadException {
       //Metodo para mostrar los entrenamientos por la intensidad
-        Entrenamiento entrenamiento = null;
+        List <Entrenamiento> list;
         try {
-            entrenamiento = em.find(Entrenamiento.class, intensdidad);
+            list = em.createNamedQuery("viewByIntensity").setParameter("intensidad", intensidad).getResultList();
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
-        return entrenamiento;
+        return list;
     }
 
     @Override
-    public Entrenamiento viewByObjetivo(Objetivo objetivo) throws ReadException {
+    public List <Entrenamiento> viewByObjetivo(Integer idObjetivo) throws ReadException {
         //Metodo para mostrar los entrenamientos pot el id de objetivo 
-        Entrenamiento entrenamiento = null;
+        List <Entrenamiento> list;
         try{
-            entrenamiento = em.find(Entrenamiento.class, objetivo);
+            list = em.createNamedQuery("viewByObjective").setParameter("objetivo", em.find(Objetivo.class, idObjetivo)).getResultList();
         }catch (Exception e){
             throw new ReadException(e.getMessage());
         }
-        return entrenamiento;
+        return list;
     }
 
     @Override
@@ -109,5 +116,15 @@ public class EntrenamientoEJB implements EntrenamientoInterface {
             throw new DeleteException(e.getMessage());
         }
     }
+
+    @Override
+    public Entrenamiento viewById(Integer idEntrenamiento) throws ReadException {
+        Entrenamiento entrenamiento = null;
+        try {
+            entrenamiento = em.find(Entrenamiento.class, idEntrenamiento);
+        } catch (Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+        return entrenamiento;    }
 
 }
