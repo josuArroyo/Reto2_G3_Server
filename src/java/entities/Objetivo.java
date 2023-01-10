@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Set;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,14 +61,14 @@ public class Objetivo implements Serializable {
      */
     
 //Relaciones
-    @OneToMany(mappedBy="objetivo")
+    @OneToMany(cascade=ALL, mappedBy="objetivo")
     private Set<ObjetivoCliente> listaClientes;
 
     
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(mappedBy="idEntrenamiento")
+    @OneToMany(cascade=ALL, mappedBy="idEntrenamiento")
     private Set<Entrenamiento> listaEntrenamiento;
     
    

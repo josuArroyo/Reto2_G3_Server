@@ -37,7 +37,7 @@ public class ObjetivoClienteFacadeREST {
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
     
-     @EJB
+    @EJB
     private ObjectiveClientInterface inter2;   
 
 
