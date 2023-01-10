@@ -68,48 +68,40 @@ public class EventEJB implements EventInterface{
     }
 
     @Override
-    public Evento findEventByParticipants(Integer numPart) throws ReadException {
-        Evento event;
-        try {
-            event = em.find(Evento.class, numPart);
-        }catch(Exception e) {
-            throw new ReadException(e.getMessage());
-        }
-        return event;
-    }
-
-    @Override
     public Evento findEventByDate(Date fecha) throws ReadException {
         Evento event;
         try {
             event = em.find(Evento.class, fecha);
         }catch(Exception e) {
+            System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
         }
         return event;
     }
 
     @Override
-    public Evento findEventByType(String tipoEvento) throws ReadException {
-        Evento event;
+    public List<Evento> findEventByType(String tipoEvento) throws ReadException {
+        List<Evento> events;
         try {
-            event = em.find(Evento.class, tipoEvento);
+            events = em.createNamedQuery("findEventByType").getResultList();
         }catch(Exception e) {
+            System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
         }
-        return event; 
+        return events; 
     }
-
+/*
     @Override
-    public void subscribeToEvent(Integer numPart) throws UpdateException {
+    public Integer subscribeToEvent(Integer idEvento) throws UpdateException {
         try{
-            if(!em.contains(numPart))
+            if(!em.contains(idEvento))
                 em.createNamedQuery("suscribeToEvent").getResultList();
         }catch(Exception e) {
            throw new UpdateException(e.getMessage()); 
         }                
+        return idEvento;
     } 
-
+*/
     @Override
     public Evento filterEventById(Integer idEvento) throws ReadException {
       Evento event;
@@ -120,4 +112,15 @@ public class EventEJB implements EventInterface{
       }
         return event;
     }
+/*
+    @Override
+    public void subscribedEvent(Integer idEvento) throws ReadException {
+       Evento event;
+        try {
+            event = em.find(Evento.class, idEvento);
+        }catch(Exception e) {
+          throw new ReadException(e.getMessage());
+        }
+    }
+*/
 }

@@ -5,6 +5,7 @@
  */
 package entities;
 
+import static entities.Evento_.numPart;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -31,13 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name="Evento",schema="Fuerza_G3")
-
 @NamedQueries({
     @NamedQuery(name="viewAllEvents", query="SELECT e FROM Evento e ORDER BY e.idEvento"),
     @NamedQuery(name="findEventByParticipants", query="SELECT e FROM Evento e WHERE e.numPart = :numPart"),
     @NamedQuery(name="findEventByDate", query="SELECT e FROM Evento e WHERE e.fecha = :fecha"),
     @NamedQuery(name="findEventByType", query="SELECT e FROM Evento e WHERE e.tipoEvento = :tipoEvento"),
-    @NamedQuery(name="suscribeToEvent", query="UPDATE Evento e SET e.numPart = e.numPart + 1 WHERE e.idEvento = :idEvento")
+    //@NamedQuery(name="suscribeToEvent", query="UPDATE Evento e SET e.numPart = e.numPart + 1 WHERE e.idEvento = :idEvento")
 })
 
 @XmlRootElement
@@ -53,7 +53,6 @@ public class Evento implements Serializable {
     
     
     private Integer numPart;
-    
     
     private String descripcion;
     
@@ -76,7 +75,6 @@ public class Evento implements Serializable {
     @ManyToMany()
     @JoinTable(name="event_customer",schema="Fuerza_G3")
     private Set<Cliente> listaCliente;
-
 
     public void setIdEvento(Integer idEvento) {
         this.idEvento = idEvento;

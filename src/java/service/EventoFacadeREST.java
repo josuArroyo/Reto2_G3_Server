@@ -66,13 +66,24 @@ public class EventoFacadeREST {
              throw new InternalServerErrorException(e.getMessage());
         }
     }
-/*
-    //mal???
-    @PUT
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void subscribeToEvent(Integer numPart) {
+
+/*    
+    @GET
+    @Path("SubscribeToEvent/{idEvento}")
+    public void subscribedEvent(@PathParam("idEvento") Integer idEvento) throws ReadException {
+        
         try {
-            inter.subscribeToEvent(numPart);
+            inter.subscribedEvent(inter.subscribeToEvent(idEvento));
+        } catch (UpdateException ex) {
+            Logger.getLogger(EventoFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @PUT
+    @Path("SubscribeToEvent/{idEvento}")
+    public void subscribeToEvent(@PathParam("idEvento")Integer idEvento) {
+        try {
+            inter.subscribeToEvent(idEvento);
         } catch (UpdateException e) {
             System.out.println(e);
             throw new InternalServerErrorException(e.getMessage());
@@ -98,20 +109,9 @@ public class EventoFacadeREST {
             throw new InternalServerErrorException(e.getMessage());
         } 
     }
-
-    @GET
-    @Path("/GET/Integer{numPart}")
-    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Evento findEventByParticipants(@PathParam("numPart") Integer numPart) {
-        try {
-          return inter.findEventByParticipants(numPart);
-        }catch(ReadException e) {
-            throw new InternalServerErrorException(e.getMessage());
-        } 
-    }
     
     @GET
-    @Path("/GET/Date{fecha}")
+    @Path("FindEventBy/DATE/{fecha}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Evento findEventByDate(@PathParam("fecha") Date fecha) {
         try {
@@ -120,11 +120,11 @@ public class EventoFacadeREST {
             throw new InternalServerErrorException(e.getMessage());
         } 
     }
-    
+     
     @GET
-    @Path("/GET/String{tipoEvento}")
+    @Path("FindEventBy/String/{tipoEvento}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Evento findEventByType(@PathParam("tipoEvento") String tipoEvento) {
+    public List<Evento> findEventByType(@PathParam("tipoEvento") String tipoEvento) {
         try {
           return inter.findEventByType(tipoEvento);
         }catch(ReadException e) {
