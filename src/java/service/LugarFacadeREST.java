@@ -63,7 +63,6 @@ public class LugarFacadeREST {
         try {
             pli.modifyPlace(lugar);
         } catch (UpdateException ex) {
-            System.out.println(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
         }
 
