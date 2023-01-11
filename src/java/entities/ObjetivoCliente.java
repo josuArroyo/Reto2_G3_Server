@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="ObjetivoCliente", schema="Fuerza_G3")
 @NamedQueries({
-    @NamedQuery(name="viewAllTables", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC")
+    @NamedQuery(name="viewAllTables", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC"),
     //@NamedQuery(name="createObjective", query="INSERT INTO ObjetivoCliente VALUES(User.idUser,Objetivo.idObjetivo,NOW())"),
-    //@NamedQuery(name="filterObjectivesByDate", query="SELECT oc FROM ObjetivoCliente oc ORDER BY oc.fechaCon ASC")
+    @NamedQuery(name="filterObjectivesByDate", query="SELECT oc FROM ObjetivoCliente oc WHERE oc.fechaCon = :fechaCon")
 })
 @XmlRootElement
 public class ObjetivoCliente implements Serializable {

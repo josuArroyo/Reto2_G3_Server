@@ -29,8 +29,7 @@ public class ObjetivoClienteEJB implements ObjectiveClientInterface{
         //This method shows info from ObjetivoCLiente by it´s fechaCon Date parameter.
         ObjetivoCliente objetivoCliente;
         try{
-            objetivoCliente =
-                    em.find(ObjetivoCliente.class, fechaCon);
+            objetivoCliente = (ObjetivoCliente) em.createNamedQuery("filterObjectivesByDate").getSingleResult();
         }catch(Exception e){
             System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
@@ -40,7 +39,7 @@ public class ObjetivoClienteEJB implements ObjectiveClientInterface{
 
     @Override
     public List<ObjetivoCliente> viewObjectiveClient() throws ReadException {
-        List<ObjetivoCliente> objetivoClie = null;
+        List<ObjetivoCliente> objetivoClie;
         try{
             objetivoClie = 
                      em.createNamedQuery("viewAllTables").getResultList();

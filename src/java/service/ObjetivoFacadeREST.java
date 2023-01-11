@@ -89,7 +89,17 @@ public class ObjetivoFacadeREST {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
-
+    
+    @GET
+    @Path("FindByValue/{valorParam}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+     public List<Objetivo> findByValue(@PathParam("valorParam") String valorParam){
+         try{
+             return inter.filterObjectiveByValue(valorParam);
+         }catch(ReadException e){
+             throw new InternalServerErrorException(e.getMessage());
+         }
+     }
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Objetivo> findAll() {
@@ -100,6 +110,7 @@ public class ObjetivoFacadeREST {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
+    
 
     /*@GET
     @Path("{fechaCon}")

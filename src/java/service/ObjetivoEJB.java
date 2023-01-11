@@ -108,6 +108,18 @@ public class ObjetivoEJB implements ObjectiveInterface {
         return objetivo;
     }
 
+    @Override
+    public List<Objetivo> filterObjectiveByValue(String valorParam) throws ReadException {
+       List<Objetivo> objetivo;
+       try{
+           objetivo = 
+                   em.createNativeQuery("filterObjectiveByValue").getResultList();
+       }catch(Exception e){
+           throw new ReadException(e.getMessage());
+       }
+       return objetivo;
+    }
+
     
      
 }

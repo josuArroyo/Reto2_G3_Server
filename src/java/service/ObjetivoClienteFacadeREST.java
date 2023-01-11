@@ -87,9 +87,9 @@ public class ObjetivoClienteFacadeREST {
     }*/
 
     @GET
-    @Path("{fechaCon}")
+    @Path("findFecha/{fechaCon}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ObjetivoCliente find(@PathParam("fechaCon") Date fechaCon) {
+    public ObjetivoCliente findFecha(@PathParam("fechaCon") Date fechaCon) {
         try{
             return inter2.filterObjectiveByDate(fechaCon);
         }catch(ReadException e){
@@ -101,11 +101,13 @@ public class ObjetivoClienteFacadeREST {
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<ObjetivoCliente> findAll() {
+        List<ObjetivoCliente> objetivoCliente;
         try{
-            return inter2.viewObjectiveClient();
+            objetivoCliente = inter2.viewObjectiveClient();
         }catch(ReadException e){
             throw new InternalServerErrorException(e.getMessage());
         }
+        return objetivoCliente;
     }
 
     /*@GET

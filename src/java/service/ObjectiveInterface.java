@@ -35,6 +35,8 @@ public interface ObjectiveInterface {
     
     public Objetivo filterObjectiveById(Integer id) throws ReadException;
     
+    public List<Objetivo> filterObjectiveByValue(String valorParam) throws ReadException;
+    
     
     
 }

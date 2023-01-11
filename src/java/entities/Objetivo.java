@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @NamedQueries({
     @NamedQuery(name="viewObjective", query="SELECT o FROM Objetivo o ORDER BY o.idObjetivo"),
-    
+    @NamedQuery(name="filterObjectiveByValue",
+            query="SELECT o FROM Objetivo o WHERE o.valorParam = :valorParam")
     //@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
     //@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
     //@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
@@ -68,7 +69,7 @@ public class Objetivo implements Serializable {
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(cascade=ALL, mappedBy="idEntrenamiento")
+    @OneToMany(cascade=ALL, mappedBy="objetivo")
     private Set<Entrenamiento> listaEntrenamiento;
     
    
