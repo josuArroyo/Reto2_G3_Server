@@ -10,12 +10,21 @@ package exceptions;
  * @author 2dam
  */
 public class ReadException extends Exception{
-    
-    public ReadException(){
-        
+
+    /**
+     * Creates a new instance of <code>ReadException</code> without detail
+     * message.
+     */
+    public ReadException() {
     }
-    
-    public ReadException(String msg){
+
+    /**
+     * Constructs an instance of <code>ReadException</code> with the specified
+     * detail message.
+     *
+     * @param msg the detail message.
+     */
+    public ReadException(String msg) {
         super(msg);
     }
 }

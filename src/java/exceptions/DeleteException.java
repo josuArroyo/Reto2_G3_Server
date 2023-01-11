@@ -11,13 +11,20 @@ package exceptions;
  */
 public class DeleteException extends Exception{
     
-    public DeleteException(){
-        
+     /**
+     * Creates a new instance of <code>DeleteException</code> without detail
+     * message.
+     */
+    public DeleteException() {
     }
-    
-    public DeleteException(String msg){
-        
+
+    /**
+     * Constructs an instance of <code>DeleteException</code> with the specified
+     * detail message.
+     *
+     * @param msg the detail message.
+     */
+    public DeleteException(String msg) {
         super(msg);
     }
-    
 }
