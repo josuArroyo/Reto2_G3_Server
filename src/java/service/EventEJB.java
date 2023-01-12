@@ -6,6 +6,7 @@
 package service;
 
 import entities.Evento;
+import entities.User;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
@@ -16,6 +17,7 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -68,40 +70,27 @@ public class EventEJB implements EventInterface{
     }
 
     @Override
-    public Evento findEventByDate(Date fecha) throws ReadException {
-        Evento event;
+    public List<Evento> findEventByEventId(Integer idEvento) throws ReadException {
+        List<Evento> events;
         try {
-            event = em.find(Evento.class, fecha);
+            events = em.createNamedQuery("findEventByEventId").setParameter("idEvento", idEvento).getResultList();
         }catch(Exception e) {
-            System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
         }
-        return event;
+        return events;
     }
 
     @Override
     public List<Evento> findEventByType(String tipoEvento) throws ReadException {
         List<Evento> events;
         try {
-            events = em.createNamedQuery("findEventByType").getResultList();
+            events = em.createNamedQuery("findEventByType").setParameter("tipoEvento", tipoEvento).getResultList();
         }catch(Exception e) {
-            System.out.println(e.getMessage());
             throw new ReadException(e.getMessage());
         }
         return events; 
     }
-/*
-    @Override
-    public Integer subscribeToEvent(Integer idEvento) throws UpdateException {
-        try{
-            if(!em.contains(idEvento))
-                em.createNamedQuery("suscribeToEvent").getResultList();
-        }catch(Exception e) {
-           throw new UpdateException(e.getMessage()); 
-        }                
-        return idEvento;
-    } 
-*/
+
     @Override
     public Evento filterEventById(Integer idEvento) throws ReadException {
       Evento event;
@@ -112,15 +101,4 @@ public class EventEJB implements EventInterface{
       }
         return event;
     }
-/*
-    @Override
-    public void subscribedEvent(Integer idEvento) throws ReadException {
-       Evento event;
-        try {
-            event = em.find(Evento.class, idEvento);
-        }catch(Exception e) {
-          throw new ReadException(e.getMessage());
-        }
-    }
-*/
 }

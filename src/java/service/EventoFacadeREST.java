@@ -6,6 +6,7 @@
 package service;
 
 import entities.Evento;
+import entities.User;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
@@ -18,6 +19,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -67,29 +69,6 @@ public class EventoFacadeREST {
         }
     }
 
-/*    
-    @GET
-    @Path("SubscribeToEvent/{idEvento}")
-    public void subscribedEvent(@PathParam("idEvento") Integer idEvento) throws ReadException {
-        
-        try {
-            inter.subscribedEvent(inter.subscribeToEvent(idEvento));
-        } catch (UpdateException ex) {
-            Logger.getLogger(EventoFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @PUT
-    @Path("SubscribeToEvent/{idEvento}")
-    public void subscribeToEvent(@PathParam("idEvento")Integer idEvento) {
-        try {
-            inter.subscribeToEvent(idEvento);
-        } catch (UpdateException e) {
-            System.out.println(e);
-            throw new InternalServerErrorException(e.getMessage());
-        }
-    }
-*/
     @DELETE
     @Path("DELETE-Evento/{idEvento}")
     public void deleteEvent(@PathParam("idEvento") Integer idEvento) {
@@ -111,16 +90,16 @@ public class EventoFacadeREST {
     }
     
     @GET
-    @Path("FindEventBy/DATE/{fecha}")
+    @Path("FindEventBy/{idEvento}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Evento findEventByDate(@PathParam("fecha") Date fecha) {
+    public List<Evento> findEventByEventId(@PathParam("idEvento") Integer idEvento) {
         try {
-          return inter.findEventByDate(fecha);
+          return inter.findEventByEventId(idEvento);
         }catch(ReadException e) {
             throw new InternalServerErrorException(e.getMessage());
         } 
     }
-     
+    
     @GET
     @Path("FindEventBy/String/{tipoEvento}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

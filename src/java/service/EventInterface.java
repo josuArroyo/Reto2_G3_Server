@@ -6,6 +6,7 @@
 package service;
 
 import entities.Evento;
+import entities.User;
 import exceptions.DeleteException;
 import exceptions.CreateException;
 import exceptions.ReadException;
@@ -19,13 +20,11 @@ import java.util.Set;
  * @author Ale
  */
 public interface EventInterface {
-    //public void subscribedEvent(Integer idEvento) throws ReadException;
     public Evento filterEventById(Integer idEvento) throws ReadException;
     public void deleteEvent(Evento event) throws DeleteException;
     public List<Evento> viewEvents() throws ReadException;
     public void createEvent(Evento event) throws CreateException;
     public void modifyEvent(Evento event) throws UpdateException;
-    public Evento findEventByDate(Date fecha) throws ReadException;
+    public List<Evento> findEventByEventId(Integer idEvento) throws ReadException;
     public List<Evento> findEventByType(String tipoEvento) throws ReadException;
-    //public Integer subscribeToEvent(Integer idEvento) throws UpdateException;
 }
