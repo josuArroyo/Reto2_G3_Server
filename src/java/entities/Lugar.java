@@ -56,6 +56,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 })
 
+//comienzo de la clase
 @XmlRootElement
 public class Lugar implements Serializable {
 
