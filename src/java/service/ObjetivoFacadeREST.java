@@ -97,6 +97,7 @@ public class ObjetivoFacadeREST {
          try{
              return inter.filterObjectiveByValue(valorParam);
          }catch(ReadException e){
+             System.out.println(e.getMessage());
              throw new InternalServerErrorException(e.getMessage());
          }
      }

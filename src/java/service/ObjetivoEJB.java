@@ -113,7 +113,7 @@ public class ObjetivoEJB implements ObjectiveInterface {
        List<Objetivo> objetivo;
        try{
            objetivo = 
-                   em.createNativeQuery("filterObjectiveByValue").getResultList();
+                   em.createNamedQuery("filterObjectiveByValue").setParameter("valorParam", valorParam).getResultList();
        }catch(Exception e){
            throw new ReadException(e.getMessage());
        }

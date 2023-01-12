@@ -25,17 +25,17 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Diego Y Jessica
  */
-
 @Entity
-@Table(name="Objetivo", schema="Fuerza_G3")
+@Table(name = "Objetivo", schema = "Fuerza_G3")
 
 @NamedQueries({
-    @NamedQuery(name="viewObjective", query="SELECT o FROM Objetivo o ORDER BY o.idObjetivo"),
-    @NamedQuery(name="filterObjectiveByValue",
-            query="SELECT o FROM Objetivo o WHERE o.valorParam = :valorParam")
-    //@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
-    //@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
-    //@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
+    @NamedQuery(name = "viewObjective", query = "SELECT o FROM Objetivo o ORDER BY o.idObjetivo")
+    ,
+    @NamedQuery(name = "filterObjectiveByValue",
+            query = "SELECT o FROM Objetivo o WHERE o.valorParam = :valorParam")
+//@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
+//@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
+//@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
 })
 @XmlRootElement
 public class Objetivo implements Serializable {
@@ -44,35 +44,28 @@ public class Objetivo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idObjetivo;
-    
-   
+
     private String descripcion;
-    
-    
+
     private String valorParam;
-    
-    
+
     private String descriParam;
-    
+
     @ManyToOne
     private Admin admin;
 
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    
 //Relaciones
-    @OneToMany(cascade=ALL, mappedBy="objetivo")
+    @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<ObjetivoCliente> listaClientes;
 
-    
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(cascade=ALL, mappedBy="objetivo")
+    @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<Entrenamiento> listaEntrenamiento;
-    
-   
 
     public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
         this.listaEntrenamiento = listaEntrenamiento;
@@ -91,7 +84,6 @@ public class Objetivo implements Serializable {
     public void setListaClientes(Set<ObjetivoCliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
-    
 
     public Admin getAdmin() {
         return admin;
@@ -100,8 +92,6 @@ public class Objetivo implements Serializable {
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
-
-  
 
     public void setIdObjetivo(Integer idObjetivo) {
         this.idObjetivo = idObjetivo;
@@ -159,5 +149,5 @@ public class Objetivo implements Serializable {
     public String toString() {
         return "entities.Objetivo[ id=" + idObjetivo + " ]";
     }
-    
+
 }
