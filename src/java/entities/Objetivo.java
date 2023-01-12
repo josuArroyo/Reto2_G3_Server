@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 //@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
 //@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
 })
+//funcionaporfi
 @XmlRootElement
 public class Objetivo implements Serializable {
 
