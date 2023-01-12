@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,51 +25,49 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Diego Y Jessica
  */
-
 @Entity
-@Table(name="Objetivo", schema="Fuerza_G3")
+@Table(name = "Objetivo", schema = "Fuerza_G3")
+
+@NamedQueries({
+    @NamedQuery(name = "viewObjective", query = "SELECT o FROM Objetivo o ORDER BY o.idObjetivo")
+    ,
+    @NamedQuery(name = "filterObjectiveByValue",
+            query = "SELECT o FROM Objetivo o WHERE o.valorParam = :valorParam")
+//@NamedQuery(name="createObjective", query="INSERT INTO Objetivo VALUES(?,?,?,?)"),
+//@NamedQuery(name="modifyObjective", query="UPDATE Objetivo SET descripcion = ?, valorParam = ?, descriParam = ? LIKE idObjetivo = ?"),
+//@NamedQuery(name="deleteObjective", query="DELETE Objetivo WHERE idObjetivo = ?")
+})
+//funcionaporfi
 @XmlRootElement
 public class Objetivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
     private Integer idObjetivo;
-    
-   
+
     private String descripcion;
-    
-    
+
     private String valorParam;
-    
-    
+
     private String descriParam;
-    
+
     @ManyToOne
     private Admin admin;
 
     /**
      * @associates <{uml.ObjetivoUser}>
      */
-    
 //Relaciones
-    @OneToMany (mappedBy="objetivo")
+    @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<ObjetivoCliente> listaClientes;
 
-    
     /**
      * @associates <{uml.Entrenamiento}>
      */
-    @OneToMany(cascade =  ALL, mappedBy="objetivo")
+    @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<Entrenamiento> listaEntrenamiento;
 
-    
-    
-    
-    //getters and setters 
-    
-    
     public void setListaEntrenamiento(Set<Entrenamiento> listaEntrenamiento) {
         this.listaEntrenamiento = listaEntrenamiento;
     }
@@ -85,7 +85,6 @@ public class Objetivo implements Serializable {
     public void setListaClientes(Set<ObjetivoCliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
-    
 
     public Admin getAdmin() {
         return admin;
@@ -94,8 +93,6 @@ public class Objetivo implements Serializable {
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
-
-  
 
     public void setIdObjetivo(Integer idObjetivo) {
         this.idObjetivo = idObjetivo;
@@ -153,5 +150,5 @@ public class Objetivo implements Serializable {
     public String toString() {
         return "entities.Objetivo[ id=" + idObjetivo + " ]";
     }
-    
+
 }
