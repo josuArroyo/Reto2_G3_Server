@@ -33,7 +33,7 @@ import javax.ws.rs.core.MediaType;
  * @author 2dam
  */
 @Path("entities.entrenamiento")
-public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
+public class EntrenamientoFacadeREST {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
@@ -45,10 +45,9 @@ public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
     Entrenamiento entrenamiento = new Entrenamiento();
     
     public EntrenamientoFacadeREST() {
-        super(Entrenamiento.class);
+       
     }
 
-    @Override
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Entrenamiento entrenamiento) {
@@ -169,7 +168,7 @@ public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
 //        return String.valueOf(super.count());
 //    }
 
-    @Override
+
     protected EntityManager getEntityManager() {
         return em;
     }
