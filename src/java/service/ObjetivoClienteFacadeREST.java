@@ -24,7 +24,7 @@ import javax.ws.rs.core.PathSegment;
 
 /**
  *
- * @author Diego
+ * @author diego
  */
 @Stateless
 @Path("entities.objetivocliente")
