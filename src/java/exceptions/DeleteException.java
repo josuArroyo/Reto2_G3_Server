@@ -6,8 +6,8 @@
 package exceptions;
 
 /**
- *
- * @author 2dam
+ * Exception thrown if any error hapens during data deletion.
+ * @author jmarturi
  */
 public class DeleteException extends Exception {
 

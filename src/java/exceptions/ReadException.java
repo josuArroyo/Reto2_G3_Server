@@ -6,8 +6,8 @@
 package exceptions;
 
 /**
- *
- * @author 2dam
+ * Exception thrown if any error hapens during data reading.
+ * @author jmarturi
  */
 public class ReadException extends Exception {
 

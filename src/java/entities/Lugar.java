@@ -5,18 +5,19 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,11 +29,34 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam,josuA
+ * @author josuA
  */
 @Entity
-@Table(name ="Lugar", schema = "Fuerza_G3")
+@Table(name = "Lugar", schema = "Fuerza_G3")
 
+@NamedQueries({
+    @NamedQuery(name = "findAllLocations",
+            query = "SELECT l FROM Lugar l ORDER BY l.idLugar DESC"
+    )
+    ,
+    @NamedQuery(
+            name = "findAllLocationsByType",
+            query = "SELECT l FROM Lugar l WHERE l.tipoLugar = :tipoLugar"
+    )
+/*
+    @NamedQuery(
+            name="insertNewLocation", query="INSERT INTO lugar (descripcion, nombre, tiempo, tipoLugar) VALUES(?,?,?.?) "
+    ),
+    @NamedQuery(
+            name="DelateLocation", query="DELETE lugar WHERE idLugar = ? "
+    ),
+    @NamedQuery(
+            name="ModifyLocation", query="UPDATE lugar SET descripcion = ?, nombre = ?, tiempo = ?, tipoLugar = ? "
+    )
+ */
+})
+
+//comienzo de la clase
 @XmlRootElement
 public class Lugar implements Serializable {
 
@@ -51,8 +75,9 @@ public class Lugar implements Serializable {
     @Column
     private String tipoLugar;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(as = Date.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date tiempo;
 
     /**
@@ -147,3 +172,4 @@ public class Lugar implements Serializable {
     }
 
 }
+

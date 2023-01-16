@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author grupo3c
  */
 @Entity
 @DiscriminatorValue("CL")
@@ -27,7 +27,6 @@ public class Cliente extends User{
   
 
     private int edad;
-   
 
     /**
      * @associates <{uml.ObjetivoUser}>
@@ -38,7 +37,7 @@ public class Cliente extends User{
     /**
      * @associates <{uml.Evento}>
      */
-    @ManyToMany(mappedBy="listaCliente")
+    @ManyToMany(mappedBy = "listaCliente")
     private Set<Evento> listaEvento;
 
     @XmlTransient
@@ -68,7 +67,6 @@ public class Cliente extends User{
     public int getEdad() {
         return edad;
     }
-
 
     @Override
     public String toString() {

@@ -5,6 +5,7 @@
  */
 package entities;
 
+import static entities.Evento_.numPart;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,10 +28,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ale, 
+ * @author Ale 
  */
 @Entity
 @Table(name="Evento",schema="Fuerza_G3")
+@NamedQueries({
+    @NamedQuery(name="viewAllEvents", query="SELECT e FROM Evento e ORDER BY e.idEvento"),
+    @NamedQuery(name="findEventByEventId", query="SELECT e FROM Evento e WHERE e.idEvento = :idEvento"),
+    @NamedQuery(name="findEventByType", query="SELECT e FROM Evento e WHERE e.tipoEvento = :tipoEvento")
+})
+
 @XmlRootElement
 public class Evento implements Serializable {
 
@@ -43,10 +52,8 @@ public class Evento implements Serializable {
     
     private Integer numPart;
     
-    
     private String descripcion;
     
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     
@@ -66,7 +73,7 @@ public class Evento implements Serializable {
     @ManyToMany()
     @JoinTable(name="event_customer",schema="Fuerza_G3")
     private Set<Cliente> listaCliente;
-
+    
 
     public void setIdEvento(Integer idEvento) {
         this.idEvento = idEvento;
