@@ -7,7 +7,7 @@ package exceptions;
 
 /**
  *
- * @author Jessica, Diego, Josu
+ * @author Jessica
  */
 public class CreateException extends Exception{
  

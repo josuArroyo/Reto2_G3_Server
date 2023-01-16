@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author grupo3c
  */
 @Entity
 @Table(name="User", schema="Fuerza_G3")

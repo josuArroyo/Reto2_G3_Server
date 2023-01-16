@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
 @Stateless
 public class EntrenamientoEJB implements EntrenamientoInterface {

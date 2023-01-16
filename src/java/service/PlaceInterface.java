@@ -15,7 +15,7 @@ import java.util.Set;
 
 /**
  *
- * @author 2dam
+ * @author Josu
  */
 public interface PlaceInterface {
 

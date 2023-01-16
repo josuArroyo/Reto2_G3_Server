@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author 2dam
+ * @author Josu
  */
 @Path("entities.lugar")
 public class LugarFacadeREST {
