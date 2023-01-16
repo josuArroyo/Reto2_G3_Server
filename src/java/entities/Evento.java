@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ale, 
+ * @author Ale 
  */
 @Entity
 @Table(name="Evento",schema="Fuerza_G3")
