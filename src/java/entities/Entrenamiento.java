@@ -72,6 +72,31 @@ public class Entrenamiento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idEntrenamiento;
+    
+ 
+    private String descripcion;
+    
+   
+    private Integer duracion;
+    
+    
+    @Temporal (TemporalType.TIMESTAMP)
+    private Date fechaPeriod;
+    
+  
+    private Integer intensidad;
+    
+    
+    private Integer repeticion;
+    
+  
+    @ManyToOne
+    private Objetivo objetivo;
+    
+   
+    @ManyToMany ()
+    @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
+    private Set<Admin> admin;
 
     private String descripcion;
 
