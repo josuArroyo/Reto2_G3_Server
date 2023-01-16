@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Ale
+ * @author grupo3c
  */
 @Stateless
 @Path("entities.cliente")

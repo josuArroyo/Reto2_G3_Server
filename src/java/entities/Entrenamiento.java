@@ -81,6 +81,8 @@ public class Entrenamiento implements Serializable {
     
     
     @Temporal (TemporalType.TIMESTAMP)
+    @JsonSerialize(as = Date.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date fechaPeriod;
     
   
@@ -90,34 +92,14 @@ public class Entrenamiento implements Serializable {
     private Integer repeticion;
     
   
-    @ManyToOne
+    @ManyToOne(cascade = MERGE)
     private Objetivo objetivo;
     
    
     @ManyToMany ()
     @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
     private Set<Admin> admin;
-
-    private String descripcion;
-
-    private Integer duracion;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonSerialize(as = Date.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
-
-    private Date fechaPeriod;
-
-    private Integer intensidad;
-
-    private Integer repeticion;
-
-    @ManyToOne(cascade = MERGE)
-    private Objetivo objetivo;
-
-    @ManyToMany()
-    @JoinTable(name = "adminEntrenamiento", schema = "Fuerza_G3")
-    private Set<Admin> admin;
+   
 
     public void setIdEntrenamiento(Integer idEntrenamiento) {
         this.idEntrenamiento = idEntrenamiento;

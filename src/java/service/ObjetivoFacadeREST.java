@@ -31,7 +31,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 /**
  *
- * @author Ale
+ * @author Diego
  */
 @Path("entities.objetivo")
 public class ObjetivoFacadeREST {

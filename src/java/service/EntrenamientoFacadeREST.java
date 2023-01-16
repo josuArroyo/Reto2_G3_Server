@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
 @Path("entities.entrenamiento")
 public class EntrenamientoFacadeREST {
