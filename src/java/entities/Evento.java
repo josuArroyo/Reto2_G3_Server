@@ -5,6 +5,7 @@
  */
 package entities;
 
+import static entities.Evento_.numPart;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -12,31 +13,67 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author Ale, 
  */
 @Entity
+@Table(name="Evento",schema="Fuerza_G3")
+@NamedQueries({
+    @NamedQuery(name="viewAllEvents", query="SELECT e FROM Evento e ORDER BY e.idEvento"),
+    @NamedQuery(name="findEventByEventId", query="SELECT e FROM Evento e WHERE e.idEvento = :idEvento"),
+    @NamedQuery(name="findEventByType", query="SELECT e FROM Evento e WHERE e.tipoEvento = :tipoEvento")
+})
+
+@XmlRootElement
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idEvento;
-        private String tipoEvento;
+    
+  
+    private String tipoEvento;
+    
+    
     private Integer numPart;
+    
     private String descripcion;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    
+    
     private String premio;
+    
+    @ManyToOne
     private Admin admin;
+    
+    @ManyToOne
     private Lugar lugar;
 
     /**
      * @associates <{uml.Cliente}>
      */
+    
+    @ManyToMany()
+    @JoinTable(name="event_customer",schema="Fuerza_G3")
     private Set<Cliente> listaCliente;
-
+    
 
     public void setIdEvento(Integer idEvento) {
         this.idEvento = idEvento;
@@ -107,6 +144,7 @@ public class Evento implements Serializable {
         this.listaCliente = listaCliente;
     }
 
+    @XmlTransient
     public Set<Cliente> getListaCliente() {
         return listaCliente;
     }

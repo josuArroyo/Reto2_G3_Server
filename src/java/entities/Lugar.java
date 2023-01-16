@@ -8,41 +8,66 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author 2dam,josuA
  */
 @Entity
+@Table(name ="Lugar", schema = "Fuerza_G3")
+
+@XmlRootElement
 public class Lugar implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idLugar;
+
+    @Column
     private String nombre;
+
+    @Column
     private String descripcion;
+
+    @Column
     private String tipoLugar;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date tiempo;
 
     /**
      * @associates <{uml.Evento}>
      */
-    private List<Evento> listaEvento;
+    @OneToMany(mappedBy = "lugar")
+    private Set<Evento> listaEvento;
+
+    @ManyToOne
     private Admin admin;
 
-
- 
-
-    public void setListaEvento(List<Evento> listaEvento) {
+    public void setListaEvento(Set<Evento> listaEvento) {
         this.listaEvento = listaEvento;
     }
 
-    public List<Evento> getListaEvento() {
+    @XmlTransient
+    public Set<Evento> getListaEvento() {
         return listaEvento;
     }
 
@@ -57,8 +82,7 @@ public class Lugar implements Serializable {
     public void setIdLugar(Integer idLugar) {
         this.idLugar = idLugar;
     }
-    
-    
+
     public Integer getIdLugar() {
         return idLugar;
     }
@@ -119,5 +143,5 @@ public class Lugar implements Serializable {
     public String toString() {
         return "entities.Lugar[ id=" + idLugar + " ]";
     }
-    
+
 }

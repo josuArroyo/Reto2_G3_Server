@@ -5,13 +5,15 @@
  */
 package entities;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,34 +21,39 @@ import javax.persistence.Id;
  */
 @Entity
 @DiscriminatorValue("AD")
-public class Admin extends User {
+@XmlRootElement
+public class Admin extends User{
 
     private static final long serialVersionUID = 1L;
     
     @GeneratedValue(strategy = GenerationType.AUTO)
-   
+    
     
     private String licencia;
-    private User user;
+    
 
     /**
      * @associates <{uml.Evento}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Evento> listaEvento;
 
     /**
      * @associates <{uml.Lugar}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Lugar> listaLugar;
 
     /**
      * @associates <{uml.Entrenamiento}>
      */
+    @ManyToMany(mappedBy="admin")
     private Set<Entrenamiento> listaEntrenamiento;
 
     /**
      * @associates <{uml.Objetivo}>
      */
+    @OneToMany (mappedBy = "admin")
     private Set<Objetivo> listaObjetivo;
 
 
@@ -58,18 +65,11 @@ public class Admin extends User {
         return licencia;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
     public void setListaEvento(Set<Evento> listaEvento) {
         this.listaEvento = listaEvento;
     }
 
+    @XmlTransient
     public Set<Evento> getListaEvento() {
         return listaEvento;
     }
@@ -78,6 +78,7 @@ public class Admin extends User {
         this.listaLugar = listaLugar;
     }
 
+    @XmlTransient
     public Set<Lugar> getListaLugar() {
         return listaLugar;
     }
@@ -86,6 +87,7 @@ public class Admin extends User {
         this.listaEntrenamiento = listaEntrenamiento;
     }
 
+    @XmlTransient
     public Set<Entrenamiento> getListaEntrenamiento() {
         return listaEntrenamiento;
     }
@@ -94,6 +96,7 @@ public class Admin extends User {
         this.listaObjetivo = listaObjetivo;
     }
 
+    @XmlTransient
     public Set<Objetivo> getListaObjetivo() {
         return listaObjetivo;
     }

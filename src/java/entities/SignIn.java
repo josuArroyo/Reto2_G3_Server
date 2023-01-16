@@ -6,16 +6,25 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author Diego y Jessica
  */
 @Entity
+@Table(name="SignIn", schema="Fuerza_G3")
+@XmlRootElement
 public class SignIn implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,18 +32,34 @@ public class SignIn implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
+    
     private String nomUser;
+    
     private String passwd;
-    private User user;
+ 
 
+    //@OneToMany(mappedBy="User")
+    @ManyToMany //(mappedBy = "listaSignIn")
+    public Set<User> listaUsers;
 
-    public void setUser(User user) {
-        this.user = user;
+    @XmlTransient
+    public Set<User> getListaUsers() {
+        return listaUsers;
     }
 
-    public User getUser() {
-        return user;
+    public void setListaUsers(Set<User> listaUsers) {
+        this.listaUsers = listaUsers;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    
 
     public void setNomUser(String nomUser) {
         this.nomUser = nomUser;

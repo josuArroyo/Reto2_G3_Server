@@ -7,29 +7,62 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
+
 @Entity
+@Table(name="Entrenamiento", schema="Fuerza_G3")
+@XmlRootElement
 public class Entrenamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer idEntrenamiento;
+    private Integer idEntrenamiento;
+    
+ 
     private String descripcion;
+    
+   
     private Integer duracion;
+    
+    
+    @Temporal (TemporalType.TIMESTAMP)
     private Date fechaPeriod;
+    
+  
     private Integer intensidad;
+    
+    
     private Integer repeticion;
+    
+  
+    @ManyToOne
     private Objetivo objetivo;
-    private Admin admin;
+    
+   
+    @ManyToMany ()
+    @JoinTable(name="adminEntrenamiento", schema="Fuerza_G3")
+    private Set<Admin> admin;
 
 
     public void setIdEntrenamiento(Integer idEntrenamiento) {
@@ -48,14 +81,16 @@ public class Entrenamiento implements Serializable {
         return objetivo;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public Admin getAdmin() {
+    @XmlTransient
+    public Set<Admin> getAdmin() {
         return admin;
     }
 
+    public void setAdmin(Set<Admin> admin) {
+        this.admin = admin;
+    }
+
+   
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
