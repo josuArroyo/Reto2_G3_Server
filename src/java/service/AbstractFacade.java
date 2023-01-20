@@ -5,8 +5,12 @@
  */
 package service;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
+import entities.User;
+import entities.UserPrivilege;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,6 +19,9 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+    
+    @PersistenceContext(unitName = "Reto2_G3_ServerPU")
+    private EntityManager em;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -61,4 +68,11 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
+    public List<User> findUserbyLogin(String login, String passwd){
+        return em.createNamedQuery("viewUsersByLogin&asswd", User.class).setParameter("login", login).setParameter("passwd", passwd).getResultList();
+    }
+    
+    public List<User> findUserbyPrivilege(UserPrivilege userPrivilege){
+        return em.createNamedQuery("filterUserByPrivilege", User.class).setParameter("userPrivilege", userPrivilege).getResultList();
+    }
 }

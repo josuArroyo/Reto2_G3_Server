@@ -12,9 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,7 +31,7 @@ public class SignIn implements Serializable {
     private Integer id;
     
     
-    private String nomUser;
+    private String login;
     
     private String passwd;
  
@@ -58,16 +56,15 @@ public class SignIn implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    
 
-    public void setNomUser(String nomUser) {
-        this.nomUser = nomUser;
+    public String getLogin() {
+        return login;
     }
 
-    public String getNomUser() {
-        return nomUser;
+    public void setLogin(String login) {
+        this.login = login;
     }
+    
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;

@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author grupo3c
+ * @author 2dam
  */
 @Stateless
 @Path("entities.signin")

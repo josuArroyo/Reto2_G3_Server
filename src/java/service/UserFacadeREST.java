@@ -6,6 +6,7 @@
 package service;
 
 import entities.User;
+import entities.UserPrivilege;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,12 +20,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import service.AbstractFacade;
 
 /**
  *
- * @author grupo3c
+ * @author 2dam
  */
-@Stateless
 @Path("entities.user")
 public class UserFacadeREST extends AbstractFacade<User> {
 
@@ -81,6 +82,20 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("findUserbyLogin&Passwrd/{login}/{passwd}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findUsersByLogin(@PathParam("login") String login, @PathParam("passwd") String passwd){
+        return super.findUserbyLogin(login, passwd);
+    }
+    
+    @GET
+    @Path("findUserbyPrivilege/{userPrivilege}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findUsersByPrivilege(@PathParam("userPrivilege") UserPrivilege userPrivilege){
+        return super.findUserbyPrivilege(userPrivilege);
     }
 
     @Override

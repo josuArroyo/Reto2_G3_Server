@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author grupo3c
  */
 @Entity
-@DiscriminatorValue("AD")
+@DiscriminatorValue("ADMIN")
 @XmlRootElement
 public class Admin extends User{
 

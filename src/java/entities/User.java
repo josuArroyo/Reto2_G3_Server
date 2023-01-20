@@ -7,15 +7,20 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -24,9 +29,16 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author 2dam
  */
+
+@NamedQueries({
+    @NamedQuery(name = "viewUsersByLogin&asswd", query = "SELECT u FROM User u WHERE u.login = :login AND u.passwd = :passwd")
+    ,
+    @NamedQuery(name = "filterUserByPrivilege",
+            query = "SELECT u FROM User u WHERE u.userPrivilege = :userPrivilege")
+})
 @Entity
+@DiscriminatorColumn(name = "privilege", discriminatorType = DiscriminatorType.STRING)
 @Table(name="User", schema="Fuerza_G3")
-@DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class User implements Serializable {
@@ -36,6 +48,16 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idUser;
+    @Column(unique = true)
+    private String login;
+    private String nombre;
+    private String email;
+    private String passwd;
+    private String confPasswd;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "privilege", insertable= false, updatable=false)
+    private UserPrivilege userPrivilege;
     
     
     public Integer getId() {
@@ -50,11 +72,25 @@ public class User implements Serializable {
         super();
     }
     
-    private String nomUser;
-    private String nombre;
-    private String email;
-    private String passwd;
-    private String confPasswd;
+    
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public UserPrivilege getPrivilege() {
+        return userPrivilege;
+    }
+
+    public void setPrivilege(UserPrivilege privilege) {
+        this.userPrivilege = privilege;
+    }
+
+    
     
     @ManyToMany //()
     private Set<SignIn> listaSignIn;
@@ -69,13 +105,7 @@ public class User implements Serializable {
         return listaSignIn;
     }
 
-    public void setNomUser(String nomUser) {
-        this.nomUser = nomUser;
-    }
-
-    public String getNomUser() {
-        return nomUser;
-    }
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
