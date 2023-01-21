@@ -11,6 +11,7 @@ import entities.UserPrivilege;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.NotFoundException;
 
 /**
  *
@@ -69,7 +70,16 @@ public abstract class AbstractFacade<T> {
     }
     
     public List<User> findUserbyLogin(String login, String passwd){
-        return em.createNamedQuery("viewUsersByLogin&asswd", User.class).setParameter("login", login).setParameter("passwd", passwd).getResultList();
+        List<User> users = null;
+        try{
+            users = em.createNamedQuery("viewUsersByLogin&asswd", User.class).setParameter("login", login).setParameter("passwd", passwd).getResultList();
+            if(users.isEmpty()){
+                throw new NotFoundException();
+            }
+        }catch(Exception e){
+            throw new NotFoundException(e.getMessage());
+        }
+        return users;
     }
     
     public List<User> findUserbyPrivilege(UserPrivilege userPrivilege){
