@@ -6,6 +6,7 @@
 package service;
 
 import entities.User;
+import entities.UserPrivilege;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,6 +14,8 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -81,6 +84,30 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("findUserbyLogin&Passwrd/{login}/{passwd}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findUsersByLogin(@PathParam("login") String login, @PathParam("passwd") String passwd){
+       
+        try{
+            return super.findUserbyLogin(login, passwd);   
+        }catch(NotFoundException e){
+            throw new NotFoundException(e.getMessage());
+        }
+    }
+
+    @GET
+    @Path("findUserbyPrivilege/{userPrivilege}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findUsersByPrivilege(@PathParam("userPrivilege") UserPrivilege userPrivilege){
+        try{
+        return super.findUserbyPrivilege(userPrivilege);
+        }catch(Exception e){
+            throw new InternalServerErrorException(e.getMessage());
+
+        }
     }
 
     @Override

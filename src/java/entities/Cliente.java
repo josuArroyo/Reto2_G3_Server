@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam
+ * @author grupo3c
  */
 @Entity
-@DiscriminatorValue("CL")
+@DiscriminatorValue("CLIENT")
 @XmlRootElement
 public class Cliente extends User{
 
