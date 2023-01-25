@@ -110,7 +110,6 @@ public class LugarFacadeREST {
         try {
             return pli.viewPlacesByType(tipoLugar);
         } catch (ReadException ex) {
-            System.out.println(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
         }
 
