@@ -88,18 +88,7 @@ public class User implements Serializable {
 
     
     
-    @ManyToMany //()
-    private Set<SignIn> listaSignIn;
-    
-    
-    public void setListaSignIn(Set<SignIn> listaSignIn) {
-        this.listaSignIn = listaSignIn;
-    }
-
-    @XmlTransient
-    public Set<SignIn> getListaSignIn() {
-        return listaSignIn;
-    }
+  
 
     
 
