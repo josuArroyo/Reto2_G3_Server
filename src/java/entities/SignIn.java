@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,8 +39,8 @@ public class SignIn implements Serializable {
     private String passwd;
  
 
-    //@OneToMany(mappedBy="User")
-    @ManyToMany //(mappedBy = "listaSignIn")
+    
+    @ManyToMany(fetch = FetchType.EAGER) 
     public Set<User> listaUsers;
 
     @XmlTransient
@@ -57,9 +58,7 @@ public class SignIn implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-    
-    
+    } 
 
     public void setNomUser(String nomUser) {
         this.nomUser = nomUser;
