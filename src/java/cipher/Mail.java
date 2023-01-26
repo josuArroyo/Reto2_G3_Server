@@ -1,6 +1,9 @@
 package cipher;
 
+import entities.User;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -14,10 +17,12 @@ import javax.mail.internet.MimeMessage;
  * @author Diego
  */
 public class Mail {
-
+    private static final Logger LOGGER = Logger.getLogger(Mail.class.getName());
+    
     //SendMail es la función principal que envia el correo, tiene un caracter string como parámetro, que es la cuenta de gmail emisora
     public static void sendMail(String body) throws Exception{
-        System.out.println("Preparandome para enviar correo");
+        LOGGER.info("Preparandome para enviar correo");
+        
         //Archivos de propiedad, configuran cosas como el host el puerto etc...
         Properties properties = new Properties();
         
@@ -41,7 +46,8 @@ public class Mail {
         Message message = prepareMessage(session, cuentaCorreo, body);
         //.send() envia el mensaje
          Transport.send(message);
-         System.out.println("Correo Enviado");
+         LOGGER.info("Correo Enviado");
+         
     }
     //PrepareMessage es el mensaje de por sí
     private static Message prepareMessage(Session session, String cuentaCorreo, String body){
@@ -53,16 +59,18 @@ public class Mail {
             message.setFrom(new InternetAddress(cuentaCorreo));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(body));
             //Indicamos el sujeto y el texto del mensaje
-            message.setSubject("Correo prueba ");
-            message.setText("Hola Esti");
+            message.setSubject("Contraseña nueva");
+            message.setText("");
             return message;
         }catch(Exception e){
-            System.out.println("Error");
+             Logger.getLogger(Mail.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }
     //Desde un método main llamamos a send mail y le pasamos la cuenta de correo destinataria
     public static void main(String[] args) throws Exception{
-        sendMail("Conkergox98@gmail.com");
+        User user = new User();
+        String CuentaCorreo = user.getEmail();
+        sendMail(CuentaCorreo);
     }
 }

@@ -85,4 +85,6 @@ public abstract class AbstractFacade<T> {
     public List<User> findUserbyPrivilege(UserPrivilege userPrivilege){
         return em.createNamedQuery("filterUserByPrivilege", User.class).setParameter("userPrivilege", userPrivilege).getResultList();
     }
+    
+    
 }

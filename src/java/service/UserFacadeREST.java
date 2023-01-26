@@ -5,6 +5,9 @@
  */
 package service;
 
+import cipher.Cifrado;
+import cipher.Hash;
+import cipher.Mail;
 import entities.User;
 import entities.UserPrivilege;
 import java.util.List;
@@ -41,15 +44,25 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(User entity) {
-        super.create(entity);
+    public void create(User user) {
+        Cifrado cf = new Cifrado();
+        Hash hash = new Hash();
+        String text = Cifrado.desencriptar(user.getPasswd());
+        text = hash.cifrarTexto(text);
+        user.setPasswd(text);
+        super.create(user);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, User entity) {
-        super.edit(entity);
+    public void edit(@PathParam("id") Integer id, User user) {
+        Cifrado cf = new Cifrado();
+        Hash hash = new Hash();
+        String text = Cifrado.desencriptar(user.getPasswd());
+        text = hash.cifrarTexto(text);
+        user.setPasswd(text);
+        super.edit(user);
     }
 
     @DELETE
@@ -91,10 +104,47 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<User> findUsersByLogin(@PathParam("login") String login, @PathParam("passwd") String passwd){
         try{
+            
+        List<User> users = null;
+        Hash hash = new Hash();
+        passwd = Cifrado.desencriptar(passwd);
+        passwd = hash.cifrarTexto(passwd);
             return super.findUserbyLogin(login, passwd);   
         }catch(NotFoundException e){
             throw new NotFoundException(e.getMessage());
         }
+    }
+    
+    @GET
+    @Path("reset/{email}")
+    @Produces({MediaType.APPLICATION_XML})
+    public void resetContra(@PathParam("email") String email) throws Exception {
+
+        List<User> users = usuarioPorEmail(email);
+        if (!users.isEmpty()) {
+            Mail ml = new Mail();
+            Cifrado cf = new Cifrado();
+            String contra = cf.generatePassword();
+            String hash = cf.cipherPassword(email);
+            users.get(0).setPasswd(hash);
+            String mail = users.get(0).getEmail();
+            Mail.sendMail(mail);
+            em.merge(users.get(0));
+        }
+        em.flush();
+    }
+    
+    @GET
+    @Path("usuarioPorEmail/{email}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User> usuarioPorEmail(@PathParam("email") String email) {
+        List<User> users = null;
+        try {
+            users = em.createNamedQuery("usuarioPorEmail").setParameter("email", email).getResultList();
+        } catch (Exception e) {
+
+        }
+        return users;
     }
     
     @GET
