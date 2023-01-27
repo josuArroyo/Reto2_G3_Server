@@ -77,9 +77,9 @@ public class Entrenamiento implements Serializable {
 
     private Integer duracion;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @JsonSerialize(as = Date.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
 
     private Date fechaPeriod;
 

@@ -54,7 +54,7 @@ public class Evento implements Serializable {
     
     private String descripcion;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     
     
