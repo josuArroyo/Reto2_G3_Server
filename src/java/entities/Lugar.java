@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 2dam,josuA
+ * @author 2dam,josuArroyo
  */
 @Entity
 @Table(name = "Lugar", schema = "Fuerza_G3")
