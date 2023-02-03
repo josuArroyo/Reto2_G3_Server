@@ -23,8 +23,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 
 /**
- *
- * @author 2dam
+ * Este es el facadeREST de ObjetivoCliente  en el cual les ponemos las path a las consultas 
+ * @author Diego
  */
 @Stateless
 @Path("entities.objetivocliente")

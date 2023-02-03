@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * Entidad de Evento
  * @author Ale 
  */
 @Entity
@@ -66,9 +66,7 @@ public class Evento implements Serializable {
     @ManyToOne
     private Lugar lugar;
 
-    /**
-     * @associates <{uml.Cliente}>
-     */
+  
     
     @ManyToMany()
     @JoinTable(name="event_customer",schema="Fuerza_G3")

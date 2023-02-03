@@ -13,22 +13,25 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.NotFoundException;
 
 /**
+ * esta es la interfaz abstracta que es la encargada de controlar al admin y al
+ * cliente
  *
- * @author 2dam
+ * @author grupo3c
  */
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
-    
-    @PersistenceContext(unitName="Reto2_G3_ServerPU")
+
+    @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
-    
+
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     protected abstract EntityManager getEntityManager();
 
+ 
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
@@ -69,7 +72,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public List<User> findUserbyLogin(String login, String passwd) {
-      
+
         List<User> users = null;
         try {
             users = em.createNamedQuery("viewUsersByLogin&asswd", User.class).setParameter("login", login).setParameter("passwd", passwd).getResultList();
@@ -86,5 +89,3 @@ public abstract class AbstractFacade<T> {
         return em.createNamedQuery("filterUserByPrivilege", User.class).setParameter("userPrivilege", userPrivilege).getResultList();
     }
 }
-
-

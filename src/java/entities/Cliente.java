@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * Entidad de Cliente
  * @author grupo3c
  */
 @Entity
@@ -28,15 +28,11 @@ public class Cliente extends User{
 
     private int edad;
 
-    /**
-     * @associates <{uml.ObjetivoUser}>
-     */
+   
     @OneToMany (mappedBy = "cliente")
     private Set<ObjetivoCliente> listaObjetivoCliente;
 
-    /**
-     * @associates <{uml.Evento}>
-     */
+ 
     @ManyToMany(mappedBy = "listaCliente")
     private Set<Evento> listaEvento;
 

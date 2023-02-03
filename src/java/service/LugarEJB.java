@@ -18,8 +18,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author 2dam
+ * Este es ek EJB de Lugar
+ * @author Josu
  */
 @Stateless
 public class LugarEJB implements PlaceInterface {

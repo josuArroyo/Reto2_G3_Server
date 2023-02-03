@@ -21,8 +21,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * @author 2dam
+ * este es el REST del administrador
+ * @author grupo3c
  */
 @Stateless
 @Path("entities.admin")

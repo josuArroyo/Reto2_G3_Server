@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author grupo3c
+ * Entidad de Admin
+ * @author grupo3c 
  */
 @Entity
 @DiscriminatorValue("ADMIN")
@@ -32,27 +32,19 @@ public class Admin extends User{
     private String licencia;
     
 
-    /**
-     * @associates <{uml.Evento}>
-     */
+   
     @OneToMany (mappedBy = "admin")
     private Set<Evento> listaEvento;
 
-    /**
-     * @associates <{uml.Lugar}>
-     */
+    
     @OneToMany (mappedBy = "admin")
     private Set<Lugar> listaLugar;
 
-    /**
-     * @associates <{uml.Entrenamiento}>
-     */
+    
     @ManyToMany(mappedBy="admin")
     private Set<Entrenamiento> listaEntrenamiento;
 
-    /**
-     * @associates <{uml.Objetivo}>
-     */
+    
     @OneToMany (mappedBy = "admin")
     private Set<Objetivo> listaObjetivo;
 

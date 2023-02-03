@@ -6,8 +6,8 @@
 package service;
 
 /**
- *
- * @author 2dam
+ * este es el aplication config el cual contorla los REST
+ * @author grupo3c
  */
 
 import java.util.Set;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author 2dam
+ * @author grupo3c
  */
 @javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {

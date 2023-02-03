@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Diego Y Jessica
+ * Entidad de Objetivo
+ * @author Diego 
  */
 @Entity
 @Table(name = "Objetivo", schema = "Fuerza_G3")
@@ -55,16 +55,12 @@ public class Objetivo implements Serializable {
     @ManyToOne
     private Admin admin;
 
-    /**
-     * @associates <{uml.ObjetivoUser}>
-     */
+    
 //Relaciones
     @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<ObjetivoCliente> listaClientes;
 
-    /**
-     * @associates <{uml.Entrenamiento}>
-     */
+   
     @OneToMany(cascade = ALL, mappedBy = "objetivo")
     private Set<Entrenamiento> listaEntrenamiento;
 

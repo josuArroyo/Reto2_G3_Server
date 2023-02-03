@@ -18,8 +18,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author 2dam
+ * Esta clase es el EJB del entrenamiento que se encarga en llamar a las querys de crear por ejemplo
+ * @author Jessica
  */
 @Stateless
 public class EntrenamientoEJB implements EntrenamientoInterface {

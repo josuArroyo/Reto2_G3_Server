@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
-*
+* Esta es la interfaz de evento
 * @author Ale
 */
 public interface EventInterface {

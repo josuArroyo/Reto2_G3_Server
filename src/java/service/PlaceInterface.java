@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
- * @author 2dam
+ * Esta es la interfaz de lugar 
+ * @author Diego
  */
 public interface PlaceInterface {
 

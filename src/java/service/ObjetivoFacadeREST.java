@@ -30,8 +30,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 /**
- *
- * @author 2dam
+ * Este es el facadeREST de Objetivo en el cual les ponemos las path a las consultas 
+ * @author Diego
  */
 @Path("entities.objetivo")
 public class ObjetivoFacadeREST {

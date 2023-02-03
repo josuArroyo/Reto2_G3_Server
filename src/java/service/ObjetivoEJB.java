@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Este es el EJB de lugar 
  * @author Diego
  */
 @Stateless

@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author 2dam,josuArroyo
+ * Entidad de Lugar
+ * @author josuArroyo
  */
 @Entity
 @Table(name = "Lugar", schema = "Fuerza_G3")
@@ -80,9 +80,7 @@ public class Lugar implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date tiempo;
 
-    /**
-     * @associates <{uml.Evento}>
-     */
+  
     @OneToMany(mappedBy = "lugar")
     private Set<Evento> listaEvento;
 
