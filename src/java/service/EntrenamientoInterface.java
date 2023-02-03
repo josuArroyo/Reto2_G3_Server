@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * Esta es la interfaz encargada del entrenamiento 
- * @author Jessica
+ * @author Jessica.
  */
 public interface EntrenamientoInterface {
     

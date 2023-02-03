@@ -24,7 +24,7 @@ import javax.ws.rs.core.PathSegment;
 
 /**
  * Este es el facadeREST de ObjetivoCliente  en el cual les ponemos las path a las consultas 
- * @author Diego
+ * @author Diego.
  */
 @Stateless
 @Path("entities.objetivocliente")

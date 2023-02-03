@@ -16,7 +16,7 @@ import javax.ws.rs.NotFoundException;
  * esta es la interfaz abstracta que es la encargada de controlar al admin y al
  * cliente
  *
- * @author grupo3c
+ * @author grupo3c.
  */
 public abstract class AbstractFacade<T> {
 

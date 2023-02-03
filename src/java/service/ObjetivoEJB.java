@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Este es el EJB de lugar 
- * @author Diego
+ * @author Diego.
  */
 @Stateless
 public class ObjetivoEJB implements ObjectiveInterface {

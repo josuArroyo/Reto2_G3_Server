@@ -34,7 +34,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Este es el facadeREST de Evento en el cual les ponemos las path a las consultas 
- * @author Ale
+ * @author Ale.
  */
 @Path("entities.evento")
 public class EventoFacadeREST {

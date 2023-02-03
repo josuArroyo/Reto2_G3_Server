@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
 * Esta es la interfaz de evento
-* @author Ale
+* @author Ale.
 */
 public interface EventInterface {
 public Evento filterEventById(Integer idEvento) throws ReadException;

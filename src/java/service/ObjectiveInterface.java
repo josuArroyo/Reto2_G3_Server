@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Esta es la Interfaz de objetivo
- * @author Diego
+ * @author Diego.
  */
 public interface ObjectiveInterface {
     

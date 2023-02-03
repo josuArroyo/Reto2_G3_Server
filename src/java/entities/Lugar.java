@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Entidad de Lugar
+ * Entidad de Lugar.
  * @author josuArroyo
  */
 @Entity

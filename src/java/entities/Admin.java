@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Entidad de Admin
+ * Entidad de Admin.
  * @author grupo3c 
  */
 @Entity

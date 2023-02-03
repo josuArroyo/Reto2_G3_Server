@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Este es el REST del cliente
- * @author grupo3c
+ * @author grupo3c.
  */
 @Stateless
 @Path("entities.cliente")

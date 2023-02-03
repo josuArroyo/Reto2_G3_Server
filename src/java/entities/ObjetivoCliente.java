@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entidad de Objetivo Cliente
- * @author Diego Y Jessica
+ * @author Diego Y Jessica.
  */
 @Entity
 @Table(name="ObjetivoCliente", schema="Fuerza_G3")

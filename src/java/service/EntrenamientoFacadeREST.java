@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Este es el facadeREST de Entrenamiento en el cual les ponemos las path a las consultas 
- * @author Jessica
+ * @author Jessica.
  */
 @Path("entities.entrenamiento")
 public class EntrenamientoFacadeREST {

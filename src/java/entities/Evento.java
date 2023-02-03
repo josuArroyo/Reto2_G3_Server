@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Entidad de Evento
+ * Entidad de Evento.
  * @author Ale 
  */
 @Entity
