@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Entidad de Cliente.
+ * Entidad de Cliente..
  * @author grupo3c
  */
 @Entity

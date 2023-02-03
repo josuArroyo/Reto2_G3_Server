@@ -13,7 +13,7 @@ import java.util.logging.Level;
 
 
 public class Mail {
-//El método send Mail es el que se encarga de hacer el envio del correo
+//El método send Mail es el que se encarga de hacer el envio del correo.
     public static void sendMail(String body) throws Exception{
        // private static final Logger LOGGER = Logger.getLogger(Mail.class.getName());
         

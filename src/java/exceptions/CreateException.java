@@ -13,7 +13,7 @@ public class CreateException extends Exception{
  
      /**
      * Creates a new instance of <code>CreateException</code> without detail
-     * message.
+     * message..
      */
     public CreateException() {
     }

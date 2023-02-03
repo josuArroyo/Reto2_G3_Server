@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.omg.CORBA.PERSIST_STORE;
 
 /**
- * Entidad de Entrenamiento.
+ * Entidad de Entrenamiento..
  * @author Jessica
  */
 @Entity

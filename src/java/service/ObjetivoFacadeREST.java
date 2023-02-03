@@ -31,7 +31,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 /**
  * Este es el facadeREST de Objetivo en el cual les ponemos las path a las consultas 
- * @author Diego.
+ * @author Diego..
  */
 @Path("entities.objetivo")
 public class ObjetivoFacadeREST {

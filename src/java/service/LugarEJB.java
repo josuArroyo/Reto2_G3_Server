@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  * Este es ek EJB de Lugar
- * @author Josu.
+ * @author Josu..
  */
 @Stateless
 public class LugarEJB implements PlaceInterface {

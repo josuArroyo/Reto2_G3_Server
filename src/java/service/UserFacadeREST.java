@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Este es el facadeREST de User en el cual les ponemos las path a las consultas 
- * @author Diego.
+ * @author Diego..
  */
 @Stateless
 @Path("entities.user")

@@ -13,7 +13,7 @@ public class ReadException extends Exception{
 
     /**
      * Creates a new instance of <code>ReadException</code> without detail
-     * message.
+     * message..
      */
     public ReadException() {
     }

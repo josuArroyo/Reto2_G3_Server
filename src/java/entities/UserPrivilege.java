@@ -7,7 +7,7 @@ package entities;
 
 /**
  * enumeracion de privilegios de usuario
- * @author 2dam.
+ * @author 2dam..
  */
 public enum UserPrivilege {
     CLIENT, ADMIN;

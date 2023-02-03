@@ -22,7 +22,7 @@ import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entidad de Objetivo Cliente
+ * Entidad de Objetivo Cliente.
  * @author Diego Y Jessica.
  */
 @Entity

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Entidad de Objetivo.
+ * Entidad de Objetivo..
  * @author Diego 
  */
 @Entity

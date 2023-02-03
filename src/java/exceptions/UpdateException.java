@@ -13,7 +13,7 @@ public class UpdateException extends Exception{
     //
     /**
      * Creates a new instance of <code>UpdateException</code> without detail
-     * message.
+     * message..
      */
     public UpdateException() {
     }

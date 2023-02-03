@@ -13,7 +13,7 @@ public class DeleteException extends Exception{
     
      /**
      * Creates a new instance of <code>DeleteException</code> without detail
-     * message.
+     * message..
      */
     public DeleteException() {
     }

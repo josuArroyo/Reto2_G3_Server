@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * este es el REST del administrador
- * @author grupo3c.
+ * @author grupo3c..
  */
 @Stateless
 @Path("entities.admin")

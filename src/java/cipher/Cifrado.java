@@ -7,7 +7,7 @@ package cipher;
 
 /**
  *
- * @author 2dam
+ * @author 2dam.
  */
 public class Cifrado {
     
