@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Ale, 
+ * Entidad de Evento..
+ * @author Ale 
  */
 @Entity
 @Table(name="Evento",schema="Fuerza_G3")
@@ -54,7 +54,7 @@ public class Evento implements Serializable {
     
     private String descripcion;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     
     
@@ -66,9 +66,7 @@ public class Evento implements Serializable {
     @ManyToOne
     private Lugar lugar;
 
-    /**
-     * @associates <{uml.Cliente}>
-     */
+  
     
     @ManyToMany()
     @JoinTable(name="event_customer",schema="Fuerza_G3")

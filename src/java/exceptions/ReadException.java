@@ -6,10 +6,10 @@
 package exceptions;
 
 /**
- * Exception thrown if any error hapens during data reading.
- * @author jmarturi
+ *
+ * @author 2dam.
  */
-public class ReadException extends Exception {
+public class ReadException extends Exception{
 
     /**
      * Creates a new instance of <code>ReadException</code> without detail

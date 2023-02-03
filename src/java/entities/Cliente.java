@@ -14,11 +14,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author 2dam
+ * Entidad de Cliente..
+ * @author grupo3c
  */
 @Entity
-@DiscriminatorValue("CL")
+@DiscriminatorValue("CLIENT")
 @XmlRootElement
 public class Cliente extends User{
 
@@ -27,18 +27,13 @@ public class Cliente extends User{
   
 
     private int edad;
-   
 
-    /**
-     * @associates <{uml.ObjetivoUser}>
-     */
+   
     @OneToMany (mappedBy = "cliente")
     private Set<ObjetivoCliente> listaObjetivoCliente;
 
-    /**
-     * @associates <{uml.Evento}>
-     */
-    @ManyToMany(mappedBy="listaCliente")
+ 
+    @ManyToMany(mappedBy = "listaCliente")
     private Set<Evento> listaEvento;
 
     @XmlTransient
@@ -68,7 +63,6 @@ public class Cliente extends User{
     public int getEdad() {
         return edad;
     }
-
 
     @Override
     public String toString() {

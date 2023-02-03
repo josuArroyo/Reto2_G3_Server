@@ -22,8 +22,8 @@ import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Diego Y Jessica
+ * Entidad de Objetivo Cliente.
+ * @author Diego Y Jessica.
  */
 @Entity
 @Table(name="ObjetivoCliente", schema="Fuerza_G3")

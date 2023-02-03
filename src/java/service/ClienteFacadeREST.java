@@ -21,8 +21,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * @author Ale
+ * Este es el REST del cliente
+ * @author grupo3c.
  */
 @Stateless
 @Path("entities.cliente")

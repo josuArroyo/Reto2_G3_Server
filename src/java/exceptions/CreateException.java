@@ -6,12 +6,12 @@
 package exceptions;
 
 /**
- * Exception thrown if any error hapens during data creation.
- * @author jmarturi
+ *
+ * @author Jessica, Diego, Josu.
  */
-public class CreateException extends Exception {
-
-    /**
+public class CreateException extends Exception{
+ 
+     /**
      * Creates a new instance of <code>CreateException</code> without detail
      * message.
      */

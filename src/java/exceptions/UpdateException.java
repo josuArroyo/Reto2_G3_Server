@@ -6,11 +6,11 @@
 package exceptions;
 
 /**
-  * Exception thrown if any error hapens during data update.
-  * @author jmarturi
+ *
+ * @author 2dam.
  */
-public class UpdateException extends Exception {
-
+public class UpdateException extends Exception{
+    //
     /**
      * Creates a new instance of <code>UpdateException</code> without detail
      * message.

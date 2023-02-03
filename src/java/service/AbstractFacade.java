@@ -5,16 +5,25 @@
  */
 package service;
 
+import entities.User;
+import entities.UserPrivilege;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.ws.rs.NotFoundException;
 
 /**
+ * esta es la interfaz abstracta que es la encargada de controlar al admin y al
+ * cliente
  *
- * @author 2dam
+ * @author grupo3c.
  */
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+
+    @PersistenceContext(unitName = "Reto2_G3_ServerPU")
+    private EntityManager em;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -22,6 +31,7 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
+ 
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
@@ -60,5 +70,22 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
+    public List<User> findUserbyLogin(String login, String passwd) {
+
+        List<User> users = null;
+        try {
+            users = em.createNamedQuery("viewUsersByLogin&asswd", User.class).setParameter("login", login).setParameter("passwd", passwd).getResultList();
+            if (users.isEmpty()) {
+                throw new NotFoundException();
+            }
+        } catch (Exception e) {
+            throw new NotFoundException(e.getMessage());
+        }
+        return users;
+    }
+
+    public List<User> findUserbyPrivilege(UserPrivilege userPrivilege) {
+        return em.createNamedQuery("filterUserByPrivilege", User.class).setParameter("userPrivilege", userPrivilege).getResultList();
+    }
 }

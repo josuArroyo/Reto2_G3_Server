@@ -10,7 +10,7 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 /**
- *
+ * Entidad de ObjetivoClienteId..
  * @author DiegoF
  */
 @Embeddable

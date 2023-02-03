@@ -20,8 +20,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
 /**
- *
- * @author Ale
+ * Este es ek EJB de Evento 
+ * @author Ale.
  */
 @Stateless
 public class EventEJB implements EventInterface{

@@ -6,12 +6,12 @@
 package exceptions;
 
 /**
- * Exception thrown if any error hapens during data deletion.
- * @author jmarturi
+ *
+ * @author 2dam,
  */
-public class DeleteException extends Exception {
-
-    /**
+public class DeleteException extends Exception{
+    
+     /**
      * Creates a new instance of <code>DeleteException</code> without detail
      * message.
      */

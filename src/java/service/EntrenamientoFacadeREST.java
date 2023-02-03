@@ -6,13 +6,21 @@
 package service;
 
 import entities.Entrenamiento;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -21,69 +29,146 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * @author Ale
+ * Este es el facadeREST de Entrenamiento en el cual les ponemos las path a las consultas 
+ * @author Jessica.
  */
-@Stateless
 @Path("entities.entrenamiento")
-public class EntrenamientoFacadeREST extends AbstractFacade<Entrenamiento> {
+public class EntrenamientoFacadeREST {
 
     @PersistenceContext(unitName = "Reto2_G3_ServerPU")
     private EntityManager em;
+    
+    @EJB
+    private EntrenamientoInterface einterface;
+    
 
+    Entrenamiento entrenamiento = new Entrenamiento();
+    
     public EntrenamientoFacadeREST() {
-        super(Entrenamiento.class);
+       
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Entrenamiento entity) {
-        super.create(entity);
+    public void create(Entrenamiento entrenamiento) {
+        try {
+            einterface.createEntrenamiento(entrenamiento);
+        } catch (CreateException ex) {
+            System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Entrenamiento entity) {
-        super.edit(entity);
+    public void edit(@PathParam("id") Integer id, Entrenamiento entrenamiento) {
+         try {
+            einterface.modifyEntrenamiento(entrenamiento);
+        } catch (UpdateException ex) {
+            System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("deleteTraining/{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+            try {
+            einterface.deleteEntrenamiento(einterface.viewById(id));
+        } catch (DeleteException ex) {
+            throw new InternalServerErrorException(ex.getMessage());
+        } catch (ReadException ex) {
+            Logger.getLogger(EntrenamientoFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+     
     @GET
-    @Path("{id}")
+    @Path("getEntrenamientoId/{idEntrenamiento}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Entrenamiento find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public Entrenamiento findById(@PathParam("idEntrenamiento") Integer id) {
+        Entrenamiento lista;
+          try {
+              lista = einterface.viewById(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    @GET
+    @Path("getEntrenamientoObjetivo/{idObjetivo}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Entrenamiento> findObjetivo(@PathParam("idObjetivo") Integer id) {
+        List<Entrenamiento> lista;
+          try {
+              lista = einterface.viewByObjetivo(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    @GET
+    @Path("getEntrenamientoInsensidad/{intensidad}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Entrenamiento> findIntensidad(@PathParam("intensidad") Integer id) {
+        List<Entrenamiento> lista;
+          try {
+              lista = einterface.viewByIntensity(id);
+            return  lista;
+        } catch (ReadException ex) {
+              System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
     }
 
     @GET
-    @Override
+    @Path("getEntrenamientoDuracion/{duracion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+   public List<Entrenamiento> findDuracion(@PathParam("duracion") Integer id) {
+        List<Entrenamiento> lista;
+          try {
+              lista = einterface.viewByDuration(id);
+            return  lista;
+        } catch (ReadException ex) {
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Entrenamiento> findAll() {
-        return super.findAll();
+        try {
+            return einterface.viewAllEntrenamientos();
+        } catch (ReadException ex) {
+           System.out.println(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Entrenamiento> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+    
+    
+    
+    
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List<Entrenamiento> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
+//
+//    @GET
+//    @Path("count")
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
 
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
 
-    @Override
     protected EntityManager getEntityManager() {
         return em;
     }

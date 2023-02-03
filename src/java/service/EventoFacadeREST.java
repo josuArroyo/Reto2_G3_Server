@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package service;
 
 import entities.Evento;
@@ -11,6 +11,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
+
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,8 +33,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * @author 2dam
+ * Este es el facadeREST de Evento en el cual les ponemos las path a las consultas 
+ * @author Ale.
  */
 @Path("entities.evento")
 public class EventoFacadeREST {
